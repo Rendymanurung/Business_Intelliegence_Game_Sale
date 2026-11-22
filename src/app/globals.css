@@ -56,11 +56,17 @@
   --font-mono: var(--font-vt323);
 }
 
+html {
+  background-color: #0c0c1d !important;
+  color-scheme: dark;
+}
+
 body {
-  background: var(--background);
+  background-color: #0c0c1d !important;
   color: var(--foreground);
   font-family: var(--font-retro), 'Courier New', monospace;
   image-rendering: pixelated;
+  min-height: 100vh;
 }
 
 /* Scanline CRT overlay */
@@ -170,10 +176,10 @@ input[type="range"]::-moz-range-thumb {
 
 /* Smooth retro dark canvas — replaces harsh checkered grid */
 .retro-bg {
-  background-color: var(--background);
+  background-color: #0c0c1d !important;
   background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(30, 27, 75, 0.5), transparent),
-    radial-gradient(ellipse 60% 40% at 85% 30%, rgba(20, 18, 55, 0.3), transparent);
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(30, 27, 75, 0.7), #0c0c1d),
+    radial-gradient(ellipse 60% 40% at 85% 30%, rgba(20, 18, 55, 0.5), #0c0c1d) !important;
   background-attachment: fixed;
 }
 

@@ -23,9 +23,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="id"
-      className={`${pressStart.variable} ${vt323.variable} h-full antialiased`}
+      className={`${pressStart.variable} ${vt323.variable} h-full antialiased bg-[#0c0c1d]`}
+      style={{ backgroundColor: '#0c0c1d' }}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground retro-bg">
+      <body
+        className="min-h-full flex flex-col bg-[#0c0c1d] text-foreground retro-bg"
+        style={{ backgroundColor: '#0c0c1d' }}
+      >
         {children}
       </body>
     </html>

@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
-import { Search, ArrowDown, FileText, ChevronRight, Volume2, VolumeX } from 'lucide-react';
+import React, { useRef, useEffect } from 'react';
+import { Search, ArrowDown, FileText, ChevronRight } from 'lucide-react';
 import ArcadeCabinet from './ArcadeCabinet';
 
 interface HeroSectionProps {
@@ -22,7 +22,6 @@ export default function HeroSection({
   onScrollToDashboard,
 }: HeroSectionProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -32,21 +31,6 @@ export default function HeroSection({
     }
   }, []);
 
-  const toggleSound = () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (isMuted) {
-      video.muted = false;
-      video.volume = 0.5;
-      setIsMuted(false);
-      video.play().catch(() => {});
-    } else {
-      video.muted = true;
-      setIsMuted(true);
-    }
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onScrollToDashboard();
@@ -55,6 +39,7 @@ export default function HeroSection({
   return (
     <section className="relative overflow-hidden border-b-2 border-card-border bg-[#0a0a18] py-8 sm:py-14">
       {/* Video Background — Khusus dibatasi pada area Hero di atas FILTER DATA */}
+      {/* Zoomed 1.25x agar gap / tepi hitam terpotong rapi dan mengisi penuh area Hero */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden">
         <video
           ref={videoRef}
@@ -63,7 +48,8 @@ export default function HeroSection({
           muted
           playsInline
           preload="auto"
-          className="w-full h-full object-cover opacity-80"
+          className="w-full h-full object-cover opacity-80 transition-transform duration-300"
+          style={{ transform: 'scale(1.25)', transformOrigin: 'center center' }}
         >
           <source src="/bg-video.mp4" type="video/mp4" />
         </video>
@@ -176,28 +162,6 @@ export default function HeroSection({
           </div>
 
         </div>
-      </div>
-
-      {/* Discreet BGM sound toggle button in the Hero area */}
-      <div className="absolute bottom-3 right-4 z-20">
-        <button
-          type="button"
-          onClick={toggleSound}
-          title={isMuted ? 'Nyalakan Musik Latar (BGM)' : 'Matikan Musik Latar (BGM)'}
-          className="flex items-center gap-1.5 px-2.5 py-1 bg-[#0e0e22]/85 border border-primary/50 text-primary font-pixel text-[7.5px] hover:bg-primary/20 hover:border-primary active:translate-y-[1px] transition-all cursor-pointer shadow-[2px_2px_0_rgba(0,0,0,0.6)]"
-        >
-          {isMuted ? (
-            <>
-              <VolumeX className="w-3 h-3 text-muted" />
-              <span className="text-muted tracking-wider">BGM: MATI</span>
-            </>
-          ) : (
-            <>
-              <Volume2 className="w-3 h-3 text-primary animate-pulse" />
-              <span className="text-primary tracking-wider glow-green">BGM: NYALA</span>
-            </>
-          )}
-        </button>
       </div>
     </section>
   );
