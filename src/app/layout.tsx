@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Press_Start_2P, VT323 } from "next/font/google";
-import BackgroundVideo from "@/components/BackgroundVideo";
 import "./globals.css";
 
 const pressStart = Press_Start_2P({
@@ -26,8 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="id"
       className={`${pressStart.variable} ${vt323.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col text-foreground retro-bg relative">
-        <BackgroundVideo />
+      <body className="min-h-full flex flex-col bg-background text-foreground retro-bg">
         {children}
       </body>
     </html>

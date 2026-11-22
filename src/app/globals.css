@@ -57,7 +57,7 @@
 }
 
 body {
-  background: transparent;
+  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-retro), 'Courier New', monospace;
   image-rendering: pixelated;
@@ -152,9 +152,7 @@ input[type="range"]::-moz-range-thumb {
 
 /* Card base */
 .pixel-card {
-  background: rgba(22, 22, 48, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: var(--card);
   border: 2px solid var(--card-border);
   border-radius: 0;
   box-shadow: 4px 4px 0 rgba(0,0,0,0.4);
@@ -172,10 +170,10 @@ input[type="range"]::-moz-range-thumb {
 
 /* Smooth retro dark canvas — replaces harsh checkered grid */
 .retro-bg {
-  background-color: transparent;
+  background-color: var(--background);
   background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(30, 27, 75, 0.35), transparent),
-    radial-gradient(ellipse 60% 40% at 85% 30%, rgba(20, 18, 55, 0.2), transparent);
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(30, 27, 75, 0.5), transparent),
+    radial-gradient(ellipse 60% 40% at 85% 30%, rgba(20, 18, 55, 0.3), transparent);
   background-attachment: fixed;
 }
 
@@ -214,9 +212,7 @@ rect:focus {
   --muted: #9a9ac0;
   --accent: #00e676;
 
-  background-color: rgba(13, 13, 36, 0.88);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background-color: #0d0d24;
   border-bottom: 1px solid #3a3a6a;
   font-family: var(--font-retro), 'Courier New', monospace;
   color: #e6e6f5;

@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
-import { Search, ArrowDown, FileText, Sparkles, ChevronRight } from 'lucide-react';
+import React, { useRef, useState, useEffect } from 'react';
+import { Search, ArrowDown, FileText, ChevronRight, Volume2, VolumeX } from 'lucide-react';
 import ArcadeCabinet from './ArcadeCabinet';
 
 interface HeroSectionProps {
@@ -21,15 +21,56 @@ export default function HeroSection({
   onOpenDataNotes,
   onScrollToDashboard,
 }: HeroSectionProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.muted = true;
+      video.play().catch(() => {});
+    }
+  }, []);
+
+  const toggleSound = () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isMuted) {
+      video.muted = false;
+      video.volume = 0.5;
+      setIsMuted(false);
+      video.play().catch(() => {});
+    } else {
+      video.muted = true;
+      setIsMuted(true);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onScrollToDashboard();
   };
 
   return (
-    <section className="relative overflow-hidden border-b-2 border-card-border bg-black/35 backdrop-blur-[1px] py-8 sm:py-14">
-      {/* Background ambient radial glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(0,255,136,0.06),transparent)] pointer-events-none" />
+    <section className="relative overflow-hidden border-b-2 border-card-border bg-[#0a0a18] py-8 sm:py-14">
+      {/* Video Background — Khusus dibatasi pada area Hero di atas FILTER DATA */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden">
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="w-full h-full object-cover opacity-80"
+        >
+          <source src="/bg-video.mp4" type="video/mp4" />
+        </video>
+        {/* Dark contrast overlay & arcade ambient lighting */}
+        <div className="absolute inset-0 bg-[#0a0a18]/60 backdrop-blur-[0.5px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(0,255,136,0.08),transparent)]" />
+      </div>
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
@@ -125,7 +166,7 @@ export default function HeroSection({
 
           </div>
 
-          {/* Right Column: Arcade Cabinet (Mesin Dingdong) (~45% width) */}
+          {/* Right Column: Arcade Cabinet (~45% width) */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
             <ArcadeCabinet
               totalSales="8,820.01M"
@@ -135,6 +176,28 @@ export default function HeroSection({
           </div>
 
         </div>
+      </div>
+
+      {/* Discreet BGM sound toggle button in the Hero area */}
+      <div className="absolute bottom-3 right-4 z-20">
+        <button
+          type="button"
+          onClick={toggleSound}
+          title={isMuted ? 'Nyalakan Musik Latar (BGM)' : 'Matikan Musik Latar (BGM)'}
+          className="flex items-center gap-1.5 px-2.5 py-1 bg-[#0e0e22]/85 border border-primary/50 text-primary font-pixel text-[7.5px] hover:bg-primary/20 hover:border-primary active:translate-y-[1px] transition-all cursor-pointer shadow-[2px_2px_0_rgba(0,0,0,0.6)]"
+        >
+          {isMuted ? (
+            <>
+              <VolumeX className="w-3 h-3 text-muted" />
+              <span className="text-muted tracking-wider">BGM: MATI</span>
+            </>
+          ) : (
+            <>
+              <Volume2 className="w-3 h-3 text-primary animate-pulse" />
+              <span className="text-primary tracking-wider glow-green">BGM: NYALA</span>
+            </>
+          )}
+        </button>
       </div>
     </section>
   );
