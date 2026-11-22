@@ -16,6 +16,7 @@ import {
 
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
+import TeamSection from '@/components/TeamSection';
 import FilterBar from '@/components/FilterBar';
 import KPICards from '@/components/KPICards';
 import IndustryLifecycleChart from '@/components/IndustryLifecycleChart';
@@ -159,6 +160,8 @@ export default function DashboardPage() {
         onOpenDataNotes={() => setShowDataNotes(true)}
         onScrollToDashboard={scrollToDashboard}
       />
+
+      <TeamSection />
 
       <div id="analytics-dashboard" className="scroll-mt-24">
         <FilterBar
