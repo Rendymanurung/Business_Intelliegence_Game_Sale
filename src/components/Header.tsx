@@ -15,10 +15,15 @@ export default function Header({ filteredCount, totalCount }: HeaderProps) {
   return (
     <>
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-sm border-b-2 border-card-border">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 py-3 relative flex items-center justify-center">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 py-2.5 relative flex items-center justify-center">
           <div className="text-center min-w-0 px-14 sm:px-28">
-            <h1 className="font-pixel text-[10px] sm:text-[13px] font-bold text-primary leading-tight truncate glow-green tracking-wider">
-              VIDEO GAME SALES <span className="text-secondary ml-1">KRISTAL</span>
+            <h1 className="font-pixel font-bold leading-tight tracking-wider">
+              <span className="text-[10px] sm:text-[13px] text-primary glow-green block">
+                VIDEO GAME SALES
+              </span>
+              <span className="text-[8px] sm:text-[10px] text-secondary tracking-widest block mt-0.5">
+                KRISTAL
+              </span>
             </h1>
             <p className="font-retro text-sm sm:text-base text-muted mt-0.5">
               {'>'} Showing{' '}
