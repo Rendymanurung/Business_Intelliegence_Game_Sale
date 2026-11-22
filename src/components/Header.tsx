@@ -7,10 +7,19 @@ import DataNotesModal from './DataNotesModal';
 interface HeaderProps {
   filteredCount: number;
   totalCount: number;
+  onOpenDataNotes?: () => void;
 }
 
-export default function Header({ filteredCount, totalCount }: HeaderProps) {
-  const [showModal, setShowModal] = useState(false);
+export default function Header({ filteredCount, totalCount, onOpenDataNotes }: HeaderProps) {
+  const [internalModal, setInternalModal] = useState(false);
+
+  const handleOpenModal = () => {
+    if (onOpenDataNotes) {
+      onOpenDataNotes();
+    } else {
+      setInternalModal(true);
+    }
+  };
 
   return (
     <>
@@ -39,8 +48,8 @@ export default function Header({ filteredCount, totalCount }: HeaderProps) {
 
           <div className="flex-1 flex justify-end min-w-0">
             <button
-              onClick={() => setShowModal(true)}
-              className="pixel-btn inline-flex items-center gap-1.5 px-3.5 py-2 border-neon-purple bg-neon-purple-glow text-neon-purple font-pixel text-[7.5px] sm:text-[8.5px] hover:bg-neon-purple/20 transition-colors tracking-wider"
+              onClick={handleOpenModal}
+              className="pixel-btn inline-flex items-center gap-1.5 px-3.5 py-2 border-neon-purple bg-neon-purple-glow text-neon-purple font-pixel text-[7.5px] sm:text-[8.5px] hover:bg-neon-purple/20 transition-colors tracking-wider cursor-pointer"
             >
               <Info className="w-4 h-4" />
               <span className="hidden sm:inline">DATA NOTES</span>
@@ -50,7 +59,7 @@ export default function Header({ filteredCount, totalCount }: HeaderProps) {
         </div>
         <div className="h-[2px] bg-gradient-to-r from-primary via-secondary to-rose opacity-60" />
       </header>
-      {showModal && <DataNotesModal onClose={() => setShowModal(false)} />}
+      {internalModal && <DataNotesModal onClose={() => setInternalModal(false)} />}
     </>
   );
 }

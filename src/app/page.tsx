@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { useVGSalesData } from '@/hooks/useVGSalesData';
 import {
@@ -15,6 +15,7 @@ import {
 } from '@/lib/aggregations';
 
 import Header from '@/components/Header';
+import HeroSection from '@/components/HeroSection';
 import FilterBar from '@/components/FilterBar';
 import KPICards from '@/components/KPICards';
 import IndustryLifecycleChart from '@/components/IndustryLifecycleChart';
@@ -23,8 +24,10 @@ import GenreScatterChart from '@/components/GenreScatterChart';
 import CompetitiveLandscapeChart from '@/components/CompetitiveLandscapeChart';
 import GamesTable from '@/components/GamesTable';
 import EmptyState from '@/components/EmptyState';
+import DataNotesModal from '@/components/DataNotesModal';
 
 export default function DashboardPage() {
+  const [showDataNotes, setShowDataNotes] = useState(false);
   const {
     filteredData,
     genreFilteredData,
@@ -38,6 +41,13 @@ export default function DashboardPage() {
     activeFilterChips,
     totalRecords,
   } = useVGSalesData();
+
+  const scrollToDashboard = () => {
+    const el = document.getElementById('analytics-dashboard');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   const region = filters.region;
   const regionLabel = getRegionLabel(region);
@@ -135,13 +145,29 @@ export default function DashboardPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header filteredCount={filteredData.length} totalCount={totalRecords} />
-      <FilterBar
-        filters={filters}
-        updateFilter={updateFilter}
-        resetFilters={resetFilters}
-        activeFilterChips={activeFilterChips}
+      <Header
+        filteredCount={filteredData.length}
+        totalCount={totalRecords}
+        onOpenDataNotes={() => setShowDataNotes(true)}
       />
+
+      <HeroSection
+        searchQuery={filters.searchQuery}
+        onSearchChange={(q) => updateFilter('searchQuery', q)}
+        totalRecords={totalRecords}
+        filteredCount={filteredData.length}
+        onOpenDataNotes={() => setShowDataNotes(true)}
+        onScrollToDashboard={scrollToDashboard}
+      />
+
+      <div id="analytics-dashboard" className="scroll-mt-24">
+        <FilterBar
+          filters={filters}
+          updateFilter={updateFilter}
+          resetFilters={resetFilters}
+          activeFilterChips={activeFilterChips}
+        />
+      </div>
 
       <main className="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 py-5 space-y-5">
         {filteredData.length === 0 ? (
@@ -203,6 +229,8 @@ export default function DashboardPage() {
           </p>
         </footer>
       </main>
+
+      {showDataNotes && <DataNotesModal onClose={() => setShowDataNotes(false)} />}
     </div>
   );
 }
