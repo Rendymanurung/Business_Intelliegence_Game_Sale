@@ -96,22 +96,6 @@ export default function HeroSection({
               </div>
             </form>
 
-            {/* Quick Metrics Badges */}
-            <div className="flex flex-wrap items-center gap-2 pt-1">
-              <div className="px-2.5 py-1 border border-card-border bg-card font-retro text-xs sm:text-sm text-muted">
-                Penjualan: <span className="text-primary font-bold">8.820,01M</span>
-              </div>
-              <div className="px-2.5 py-1 border border-card-border bg-card font-retro text-xs sm:text-sm text-muted">
-                Judul Game: <span className="text-secondary font-bold">16.322</span>
-              </div>
-              <div className="px-2.5 py-1 border border-card-border bg-card font-retro text-xs sm:text-sm text-muted">
-                Platform: <span className="text-accent font-bold">31 Aktif</span>
-              </div>
-              <div className="px-2.5 py-1 border border-card-border bg-card font-retro text-xs sm:text-sm text-muted">
-                Era: <span className="text-rose font-bold">1980–2016</span>
-              </div>
-            </div>
-
           </div>
 
           {/* Right Column: Arcade Cabinet (~45% width) */}
