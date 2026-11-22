@@ -1,17 +1,30 @@
 'use client';
 
 import React from 'react';
-import { X } from 'lucide-react';
 import { FilterState, RegionKey } from '@/types/vgsales';
+import FilterSelect, { FilterSelectOption } from './FilterSelect';
+import YearRangeSlider from './YearRangeSlider';
+import styles from './FilterBar.module.css';
 
-const DECADES = [
-  { value: 'All', label: 'Semua' },
-  { value: '1980s', label: '1980-an' },
-  { value: '1990s', label: '1990-an' },
-  { value: '2000s', label: '2000-an' },
-  { value: '2010s', label: '2010-an' },
-];
-const PLATFORM_FAMILIES = [
+export interface FilterOptions {
+  platformFamilies?: FilterSelectOption[];
+  platformsByFamily?: Record<string, FilterSelectOption[]>;
+  genres?: FilterSelectOption[];
+  regions?: { value: RegionKey; label: string }[];
+}
+
+export interface FilterBarProps {
+  filters: FilterState;
+  onChange?: <K extends keyof FilterState>(key: K, value: FilterState[K]) => void;
+  updateFilter?: <K extends keyof FilterState>(key: K, value: FilterState[K]) => void;
+  onReset?: () => void;
+  resetFilters?: () => void;
+  resultCount?: number;
+  options?: FilterOptions;
+  activeFilterChips?: { label: string; key: keyof FilterState; value: string }[];
+}
+
+const DEFAULT_PLATFORM_FAMILIES: FilterSelectOption[] = [
   { value: 'All', label: 'Semua' },
   { value: 'Sony', label: 'Sony' },
   { value: 'Nintendo', label: 'Nintendo' },
@@ -20,7 +33,8 @@ const PLATFORM_FAMILIES = [
   { value: 'Sega', label: 'Sega' },
   { value: 'Other', label: 'Lainnya' },
 ];
-const PLATFORMS_BY_FAMILY: Record<string, { value: string; label: string }[]> = {
+
+const DEFAULT_PLATFORMS_BY_FAMILY: Record<string, FilterSelectOption[]> = {
   All: [
     { value: 'All', label: 'Semua' },
     { value: 'NES', label: 'NES' }, { value: 'SNES', label: 'SNES' }, { value: 'N64', label: 'N64' },
@@ -60,7 +74,8 @@ const PLATFORMS_BY_FAMILY: Record<string, { value: string; label: string }[]> = 
     { value: 'NG', label: 'NG' }, { value: 'WS', label: 'WS' }, { value: 'PCFX', label: 'PCFX' },
   ],
 };
-const GENRES = [
+
+const DEFAULT_GENRES: FilterSelectOption[] = [
   { value: 'All', label: 'Semua' },
   { value: 'Action', label: 'Aksi (Action)' },
   { value: 'Adventure', label: 'Petualangan (Adventure)' },
@@ -75,7 +90,8 @@ const GENRES = [
   { value: 'Sports', label: 'Olahraga (Sports)' },
   { value: 'Strategy', label: 'Strategi (Strategy)' },
 ];
-const REGIONS: { value: RegionKey; label: string }[] = [
+
+const DEFAULT_REGIONS: { value: RegionKey; label: string }[] = [
   { value: 'Global', label: 'Global' },
   { value: 'NA', label: 'Amerika Utara (NA)' },
   { value: 'EU', label: 'Eropa (EU)' },
@@ -83,157 +99,137 @@ const REGIONS: { value: RegionKey; label: string }[] = [
   { value: 'Other', label: 'Wilayah Lainnya' },
 ];
 
-interface FilterBarProps {
-  filters: FilterState;
-  updateFilter: <K extends keyof FilterState>(key: K, value: FilterState[K]) => void;
-  resetFilters: () => void;
-  activeFilterChips: { label: string; key: keyof FilterState; value: string }[];
-}
-
-function SelectFilter({
-  label,
-  value,
-  options,
+export default function FilterBar({
+  filters,
   onChange,
-  glowClass,
-}: {
-  label: string;
-  value: string;
-  options: string[] | { value: string; label: string }[];
-  onChange: (v: string) => void;
-  glowClass?: string;
-}) {
-  return (
-    <div className="flex flex-col gap-1">
-      <label className={`font-pixel text-[7px] text-muted uppercase tracking-widest ${glowClass || ''}`}>
-        {label}
-      </label>
-      <select
-        value={value}
-        onChange={e => onChange(e.target.value)}
-        className="h-8 pl-2.5 pr-7 border-2 border-card-border bg-card text-foreground font-retro text-base focus:outline-none focus:border-primary focus:shadow-[0_0_8px_#00ff8830] transition-all appearance-none cursor-pointer"
-        style={{
-          borderRadius: 0,
-          backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2300ff88' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-          backgroundPosition: 'right 0.3rem center',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: '1.25em 1.25em',
-        }}
-      >
-        {options.map(opt => {
-          const val = typeof opt === 'string' ? opt : opt.value;
-          const lbl = typeof opt === 'string' ? opt : opt.label;
-          return <option key={val} value={val}>{lbl}</option>;
-        })}
-      </select>
-    </div>
-  );
-}
+  updateFilter,
+  onReset,
+  resetFilters,
+  resultCount = 0,
+  options,
+}: FilterBarProps) {
+  const triggerChange = onChange || updateFilter || (() => {});
+  const triggerReset = onReset || resetFilters || (() => {});
 
-export default function FilterBar({ filters, updateFilter, resetFilters, activeFilterChips }: FilterBarProps) {
+  const platformFamilies = options?.platformFamilies || DEFAULT_PLATFORM_FAMILIES;
+  const platformsByFamily = options?.platformsByFamily || DEFAULT_PLATFORMS_BY_FAMILY;
+  const genres = options?.genres || DEFAULT_GENRES;
+  const regions = options?.regions || DEFAULT_REGIONS;
+
+  const currentPlatforms = platformsByFamily[filters.platformFamily] || platformsByFamily.All;
+
+  const isEcosystemActive = filters.platformFamily !== 'All' && filters.platformFamily !== 'Semua';
+  const isPlatformActive = filters.platform !== 'All' && filters.platform !== 'Semua';
+  const isGenreActive = filters.genre !== 'All' && filters.genre !== 'Semua';
+  const isRegionActive = filters.region !== 'Global';
+  const isYearActive = filters.yearMin !== 1980 || filters.yearMax !== 2016;
+
+  const isDefault =
+    !isYearActive &&
+    !isEcosystemActive &&
+    !isPlatformActive &&
+    !isGenreActive &&
+    !isRegionActive &&
+    !filters.searchQuery &&
+    !filters.crossFilterGenre &&
+    !filters.crossFilterPlatformFamily &&
+    !filters.crossFilterPlatform &&
+    !filters.crossFilterPublisher;
+
+  const handleYearChange = (min: number, max: number) => {
+    triggerChange('yearMin', min);
+    triggerChange('yearMax', max);
+    if (filters.decade !== 'All') {
+      triggerChange('decade', 'All');
+    }
+  };
+
+  const formattedResult = resultCount.toLocaleString('id-ID');
+
   return (
-    <div className="bg-background-alt border-b-2 border-card-border">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 py-3">
-        <div className="flex items-center gap-2 mb-2">
-          <span className="font-pixel text-[7px] text-secondary tracking-widest">▸ FILTER DATA</span>
-          <div className="flex-1 h-[1px] bg-card-border" />
+    <div className={styles.filterBarContainer}>
+      {/* Header bar: small title with 1px border-bottom full width */}
+      <div className={styles.filterHeader}>
+        <div className={styles.filterHeaderInner}>
+          <h2 className={styles.filterTitle}>FILTER DATA</h2>
         </div>
+      </div>
 
-        <div className="flex flex-wrap items-end gap-3">
-          <SelectFilter
-            label="Dekade"
-            value={filters.decade}
-            options={DECADES}
-            onChange={v => updateFilter('decade', v)}
+      {/* Main Grid: Year (Slider), Ecosystem, Platform, Genre, Region, Actions */}
+      <div className={styles.controlsWrapper}>
+        <div className={styles.controlsGrid}>
+          {/* 1. Tahun (Dual Thumb Slider + Presets) */}
+          <YearRangeSlider
+            id="filter-year"
+            yearMin={filters.yearMin}
+            yearMax={filters.yearMax}
+            minLimit={1980}
+            maxLimit={2016}
+            onRangeChange={handleYearChange}
           />
 
-          <div className="flex flex-col gap-1">
-            <label className="font-pixel text-[7px] text-muted uppercase tracking-widest">
-              Tahun: <span className="text-accent">{filters.yearMin}</span>–<span className="text-accent">{filters.yearMax}</span>
-            </label>
-            <div className="flex items-center gap-2 h-8">
-              <input
-                type="range"
-                min={1980}
-                max={2016}
-                value={filters.yearMin}
-                onChange={e => {
-                  const v = parseInt(e.target.value);
-                  if (v <= filters.yearMax) updateFilter('yearMin', v);
-                }}
-                className="w-20 sm:w-28"
-              />
-              <input
-                type="range"
-                min={1980}
-                max={2016}
-                value={filters.yearMax}
-                onChange={e => {
-                  const v = parseInt(e.target.value);
-                  if (v >= filters.yearMin) updateFilter('yearMax', v);
-                }}
-                className="w-20 sm:w-28"
-              />
+          {/* 2. Ekosistem */}
+          <FilterSelect
+            id="filter-ecosystem"
+            label="EKOSISTEM"
+            value={filters.platformFamily}
+            options={platformFamilies}
+            onChange={(val) => {
+              triggerChange('platformFamily', val);
+              triggerChange('platform', 'All');
+            }}
+            isActive={isEcosystemActive}
+          />
+
+          {/* 3. Platform */}
+          <FilterSelect
+            id="filter-platform"
+            label="PLATFORM"
+            value={filters.platform}
+            options={currentPlatforms}
+            onChange={(val) => triggerChange('platform', val)}
+            isActive={isPlatformActive}
+          />
+
+          {/* 4. Genre */}
+          <FilterSelect
+            id="filter-genre"
+            label="GENRE"
+            value={filters.genre}
+            options={genres}
+            onChange={(val) => triggerChange('genre', val)}
+            isActive={isGenreActive}
+          />
+
+          {/* 5. Wilayah */}
+          <FilterSelect
+            id="filter-region"
+            label="WILAYAH"
+            value={filters.region}
+            options={regions}
+            onChange={(val) => triggerChange('region', val as RegionKey)}
+            isActive={isRegionActive}
+          />
+
+          {/* 6. Area Aksi (Hitungan Hasil + Tombol Reset) */}
+          <div className={styles.fieldGroup}>
+            <span className={styles.label}>HASIL</span>
+            <div className={styles.actionGroup}>
+              <div className={styles.resultCount} title="Jumlah game hasil filter">
+                {formattedResult} GAME
+              </div>
+              <button
+                type="button"
+                onClick={triggerReset}
+                disabled={isDefault}
+                className={styles.resetBtn}
+                title={isDefault ? 'Semua filter dalam kondisi default' : 'Kembalikan semua filter ke kondisi awal'}
+              >
+                RESET
+              </button>
             </div>
           </div>
-
-          <SelectFilter
-            label="Ekosistem"
-            value={filters.platformFamily}
-            options={PLATFORM_FAMILIES}
-            onChange={v => updateFilter('platformFamily', v)}
-          />
-
-          <SelectFilter
-            label="Platform"
-            value={filters.platform}
-            options={PLATFORMS_BY_FAMILY[filters.platformFamily] || PLATFORMS_BY_FAMILY.All}
-            onChange={v => updateFilter('platform', v)}
-          />
-
-          <SelectFilter
-            label="Genre"
-            value={filters.genre}
-            options={GENRES}
-            onChange={v => updateFilter('genre', v)}
-          />
-
-          <SelectFilter
-            label="Wilayah"
-            value={filters.region}
-            options={REGIONS}
-            onChange={v => updateFilter('region', v as RegionKey)}
-          />
-
-          {activeFilterChips.length > 0 && (
-            <button
-              onClick={resetFilters}
-              className="pixel-btn h-8 px-3 border-rose bg-rose-light text-rose font-pixel text-[7px] hover:bg-rose/20 transition-colors tracking-wider"
-            >
-              ✕ ATUR ULANG
-            </button>
-          )}
         </div>
-
-        {activeFilterChips.length > 0 && (
-          <div className="flex flex-wrap items-center gap-1.5 mt-2.5">
-            <span className="font-pixel text-[7px] text-muted mr-1 tracking-wider">FILTER AKTIF:</span>
-            {activeFilterChips.map(chip => (
-              <span
-                key={chip.label}
-                className="inline-flex items-center gap-1 px-2 py-0.5 border border-primary/40 bg-primary-light text-primary font-retro text-sm"
-              >
-                {chip.label}
-                <button
-                  onClick={() => updateFilter(chip.key, chip.value as never)}
-                  className="hover:text-rose transition-colors"
-                >
-                  <X className="w-3 h-3" />
-                </button>
-              </span>
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );

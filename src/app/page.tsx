@@ -163,8 +163,9 @@ export default function DashboardPage() {
       <div id="analytics-dashboard" className="scroll-mt-24">
         <FilterBar
           filters={filters}
-          updateFilter={updateFilter}
-          resetFilters={resetFilters}
+          onChange={updateFilter}
+          onReset={resetFilters}
+          resultCount={filteredData.length}
           activeFilterChips={activeFilterChips}
         />
       </div>
