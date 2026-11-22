@@ -37,7 +37,7 @@ export default function HeroSection({
   };
 
   return (
-    <section className="relative overflow-hidden border-b-2 border-card-border bg-[#0a0a18] py-8 sm:py-14">
+    <section className="relative overflow-hidden border-b-2 border-card-border bg-[#0a0a18] -mt-[78px] pt-24 sm:pt-28 pb-8 sm:pb-14">
       {/* Video Background — Khusus dibatasi pada area Hero di atas FILTER DATA */}
       {/* Zoomed 1.25x agar gap / tepi hitam terpotong rapi dan mengisi penuh area Hero */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden">

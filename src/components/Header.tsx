@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Info } from 'lucide-react';
 import DataNotesModal from './DataNotesModal';
 
@@ -12,6 +12,16 @@ interface HeaderProps {
 
 export default function Header({ filteredCount, totalCount, onOpenDataNotes }: HeaderProps) {
   const [internalModal, setInternalModal] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleOpenModal = () => {
     if (onOpenDataNotes) {
@@ -23,7 +33,13 @@ export default function Header({ filteredCount, totalCount, onOpenDataNotes }: H
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-sm border-b-2 border-card-border">
+      <header
+        className={`sticky top-0 z-40 transition-all duration-300 ${
+          isScrolled
+            ? 'bg-[#0c0c1d]/95 backdrop-blur-md border-b-2 border-card-border shadow-lg shadow-black/40'
+            : 'bg-transparent border-b-2 border-transparent shadow-none'
+        }`}
+      >
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 py-4 sm:py-5 flex items-center justify-between gap-3 sm:gap-4 min-h-[76px]">
           <div className="flex-1 flex justify-start min-w-0">
             <p className="font-retro text-base sm:text-lg text-muted truncate">
@@ -57,7 +73,11 @@ export default function Header({ filteredCount, totalCount, onOpenDataNotes }: H
             </button>
           </div>
         </div>
-        <div className="h-[2px] bg-gradient-to-r from-primary via-secondary to-rose opacity-60" />
+        <div
+          className={`h-[2px] bg-gradient-to-r from-primary via-secondary to-rose transition-opacity duration-300 ${
+            isScrolled ? 'opacity-60' : 'opacity-0'
+          }`}
+        />
       </header>
       {internalModal && <DataNotesModal onClose={() => setInternalModal(false)} />}
     </>
