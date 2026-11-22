@@ -28,8 +28,8 @@ export default function HeroSection({
 
   return (
     <section className="relative overflow-hidden border-b-2 border-card-border bg-gradient-to-b from-background via-background-alt to-background py-8 sm:py-14">
-      {/* Background ambient grid glow */}
-      <div className="absolute inset-0 pixel-grid-bg opacity-30 pointer-events-none" />
+      {/* Background ambient radial glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(0,255,136,0.06),transparent)] pointer-events-none" />
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">

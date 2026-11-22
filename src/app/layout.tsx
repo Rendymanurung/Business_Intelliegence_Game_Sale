@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${pressStart.variable} ${vt323.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground pixel-grid-bg">
+      <body className="min-h-full flex flex-col bg-background text-foreground retro-bg">
         {children}
       </body>
     </html>
