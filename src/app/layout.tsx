@@ -15,7 +15,7 @@ const vt323 = VT323({
 });
 
 export const metadata: Metadata = {
-  title: "Video Game Sales Intelligence (1980-2016)",
+  title: "Video Game Sales KRISTAL (1980-2016)",
   description: "Retro pixel BI dashboard analyzing 16,322 video game titles across platforms, genres, and global regions.",
 };
 
