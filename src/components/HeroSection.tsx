@@ -1,24 +1,19 @@
 'use client';
 
 import React, { useRef, useEffect } from 'react';
-import { Search, ChevronRight } from 'lucide-react';
 import ArcadeCabinet from './ArcadeCabinet';
 
 interface HeroSectionProps {
-  searchQuery: string;
-  onSearchChange: (q: string) => void;
+  searchQuery?: string;
+  onSearchChange?: (q: string) => void;
   totalRecords: number;
-  filteredCount: number;
+  filteredCount?: number;
   onOpenDataNotes?: () => void;
   onScrollToDashboard: () => void;
 }
 
 export default function HeroSection({
-  searchQuery,
-  onSearchChange,
   totalRecords,
-  filteredCount,
-  onOpenDataNotes,
   onScrollToDashboard,
 }: HeroSectionProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -30,11 +25,6 @@ export default function HeroSection({
       video.play().catch(() => {});
     }
   }, []);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onScrollToDashboard();
-  };
 
   return (
     <section className="relative overflow-hidden border-b-2 border-card-border bg-[#0a0a18] pt-24 sm:pt-28 pb-8 sm:pb-14">
@@ -60,10 +50,8 @@ export default function HeroSection({
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           
-          {/* Left Column (~55% width on desktop) */}
+          {/* Left Column (~55% width on desktop): Main Headline */}
           <div className="lg:col-span-7 flex flex-col items-start space-y-6">
-            
-            {/* Main Headline (Brex-scale, Retro-crafted) */}
             <h1 className="font-pixel font-bold tracking-tight text-left leading-[1.3] sm:leading-[1.25]">
               <span className="block text-[18px] sm:text-[28px] md:text-[34px] text-foreground drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                 SEJARAH VIDEO GAME UNTUK
@@ -72,30 +60,6 @@ export default function HeroSection({
                 KECEPATAN DAN KONTROL.
               </span>
             </h1>
-
-            {/* Action Row: Search input + CTA Button (Brex email capture style) */}
-            <form onSubmit={handleSubmit} className="w-full max-w-xl">
-              <div className="flex flex-col sm:flex-row items-stretch gap-2.5 sm:gap-2 p-1.5 border-2 border-card-border bg-card/90 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
-                <div className="relative flex-1 flex items-center">
-                  <Search className="absolute left-3 w-4 h-4 text-muted pointer-events-none" />
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={e => onSearchChange(e.target.value)}
-                    placeholder="> Cari judul game, platform (PS4, NES), penerbit..."
-                    className="w-full h-11 pl-9 pr-3 bg-transparent text-foreground font-retro text-base sm:text-lg placeholder:text-muted/60 focus:outline-none"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="pixel-btn h-11 px-5 border-primary bg-primary text-background font-pixel text-[8px] sm:text-[9px] hover:bg-primary/90 flex items-center justify-center gap-1.5 transition-colors tracking-wider flex-shrink-0 cursor-pointer"
-                >
-                  <span>JELAJAHI DATA</span>
-                  <ChevronRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            </form>
-
           </div>
 
           {/* Right Column: Arcade Cabinet (~45% width) */}
