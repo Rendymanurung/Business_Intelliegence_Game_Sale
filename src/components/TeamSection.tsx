@@ -6,65 +6,53 @@ import Image from 'next/image';
 export interface TeamMember {
   id: string;
   name: string;
-  role: string;
-  division: string;
+  nim: string;
   avatar: string;
   color: string;
-  bio: string;
 }
 
 export const TEAM_MEMBERS: TeamMember[] = [
   {
     id: '01',
     name: 'Rendy Manurung',
-    role: 'Project Lead & BI Engineer',
-    division: 'Arsitektur Data & Analitik',
+    nim: '241401090',
     avatar: '/team/member1.jpg',
     color: '#00ff88',
-    bio: 'Memimpin perancangan skema data, integrasi 16.322 data penjualan, serta logika agregasi metrik.',
   },
   {
     id: '02',
-    name: 'Alexandria Pratama',
-    role: 'Data Analyst & Modeling',
-    division: 'Analisis Statistik',
+    name: 'Affan Apyga',
+    nim: '241401141',
     avatar: '/team/member2.jpg',
     color: '#00ccff',
-    bio: 'Menganalisis tren penjualan regional, matriks daya saing genre, dan estimasi siklus hidup konsol.',
   },
   {
     id: '03',
-    name: 'Citra Wulandari',
-    role: 'UI/UX & Visual Designer',
-    division: 'Desain Antarmuka',
+    name: 'Deryal Rasky',
+    nim: '241401120',
     avatar: '/team/member3.jpg',
     color: '#ffd700',
-    bio: 'Merancang estetika retro arcade, hierarki visual cyberpunk, dan ergonomi pengalaman dashboard.',
   },
   {
     id: '04',
-    name: 'Dimas Satrio',
-    role: 'Frontend & Charts Developer',
-    division: 'Pengembangan Web',
+    name: 'Deofajar Situmorang',
+    nim: '241401102',
     avatar: '/team/member4.jpg',
     color: '#ff3366',
-    bio: 'Mengembangkan visualisasi interaktif Recharts, filtering multi-dimensi, dan optimasi performa Next.js.',
   },
   {
     id: '05',
-    name: 'Evelyn Natalia',
-    role: 'QA & Data Validator',
-    division: 'Penjaminan Kualitas',
+    name: 'Michael Garcia',
+    nim: '241401069',
     avatar: '/team/member5.jpg',
     color: '#c678dd',
-    bio: 'Memvalidasi integritas dataset 1980-2016, pembersihan missing values, dan pengujian responsivitas.',
   },
 ];
 
 export default function TeamSection() {
   const stageRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const [activeIdx, setActiveIdx] = useState(2); // Start focused on middle card
+  const [activeIdx, setActiveIdx] = useState(2);
 
   const stateRef = useRef({
     phase: 2,
@@ -264,7 +252,7 @@ export default function TeamSection() {
             <span className="text-primary glow-green">KRISTAL BI</span>
           </h2>
           <p className="font-retro text-base sm:text-lg text-muted max-w-2xl mt-2 leading-relaxed">
-            {'>'} 5 anggota tim yang merancang skema data, arsitektur visualisasi, dan logika analitik video game 1980-2016.
+            {'>'} 5 anggota tim pengembang platform analitik video game 1980-2016.
           </p>
         </div>
 
@@ -308,7 +296,7 @@ export default function TeamSection() {
                 }}
                 type="button"
                 onClick={() => moveTo(idx)}
-                aria-label={`Pilih profil ${member.name}, ${member.role}`}
+                aria-label={`Pilih profil ${member.name}, NIM ${member.nim}`}
                 className="group absolute top-1/2 left-1/2 w-[165px] sm:w-[210px] md:w-[235px] aspect-[0.72] p-2 text-left cursor-pointer rounded-none border-2 transition-shadow duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 style={{
                   transformStyle: 'preserve-3d',
@@ -335,47 +323,19 @@ export default function TeamSection() {
                     className="absolute inset-0 opacity-15 mix-blend-color"
                     style={{ backgroundColor: member.color }}
                   />
-                  {/* Division badge */}
-                  <div className="absolute top-2 left-2 z-10">
-                    <span
-                      className="font-pixel text-[6px] px-1.5 py-0.5 border"
-                      style={{
-                        backgroundColor: '#0c0c1dcc',
-                        borderColor: member.color,
-                        color: member.color,
-                      }}
-                    >
-                      {member.division}
-                    </span>
-                  </div>
                 </div>
 
-                {/* Footer meta */}
-                <div className="relative h-[26%] flex items-center gap-2.5 px-2 bg-[#10102a] border-t border-[#2d2b5a] mt-1.5">
-                  {/* Index badge */}
-                  <div
-                    className="w-7 h-7 flex-shrink-0 flex items-center justify-center border rounded-none font-pixel text-[9px] font-bold"
-                    style={{
-                      borderColor: member.color,
-                      color: member.color,
-                      backgroundColor: `${member.color}15`,
-                    }}
+                {/* Footer meta: Nama (tulisan putih) dan NIM (dibawahnya), tanpa icon nomor */}
+                <div className="relative h-[26%] flex flex-col justify-center px-3 bg-[#10102a] border-t border-[#2d2b5a] mt-1.5 overflow-hidden">
+                  <p className="font-pixel text-[8px] sm:text-[9.5px] text-white font-bold tracking-tight truncate uppercase leading-tight drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+                    {member.name}
+                  </p>
+                  <p
+                    className="font-retro text-sm sm:text-base font-semibold truncate leading-none mt-1 tracking-wider"
+                    style={{ color: member.color }}
                   >
-                    {member.id}
-                  </div>
-
-                  {/* Name and role */}
-                  <div className="min-w-0 flex-1 overflow-hidden">
-                    <p className="font-pixel text-[8px] sm:text-[9px] text-foreground font-bold tracking-tight truncate uppercase leading-tight">
-                      {member.name}
-                    </p>
-                    <p
-                      className="font-retro text-xs sm:text-sm font-semibold truncate leading-none mt-0.5"
-                      style={{ color: member.color }}
-                    >
-                      {member.role}
-                    </p>
-                  </div>
+                    NIM: {member.nim}
+                  </p>
                 </div>
               </button>
             ))}
@@ -397,89 +357,6 @@ export default function TeamSection() {
                 }}
               />
             ))}
-          </div>
-        </div>
-
-        {/* 5-Member Card Grid (Inspired by the Brex layout reference) */}
-        <div className="mt-10 sm:mt-14">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5">
-            {TEAM_MEMBERS.map((member, idx) => {
-              const isSelected = idx === activeIdx;
-              return (
-                <div
-                  key={member.id}
-                  onClick={() => moveTo(idx)}
-                  className="group flex flex-col p-4 border-2 transition-all duration-200 cursor-pointer"
-                  style={{
-                    backgroundColor: isSelected ? '#1c1c3c' : '#161630',
-                    borderColor: isSelected ? member.color : '#2d2b5a',
-                    boxShadow: isSelected
-                      ? `0 6px 18px rgba(0,0,0,0.4), inset 0 0 10px ${member.color}18`
-                      : '3px 3px 0 rgba(0,0,0,0.3)',
-                  }}
-                >
-                  {/* Photo thumbnail */}
-                  <div className="relative w-full aspect-square overflow-hidden mb-3 border border-[#2d2b5a] bg-[#10102a]">
-                    <Image
-                      src={member.avatar}
-                      alt={member.name}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div
-                      className="absolute top-2 right-2 px-1.5 py-0.5 border font-pixel text-[7px]"
-                      style={{
-                        backgroundColor: '#0c0c1de6',
-                        borderColor: member.color,
-                        color: member.color,
-                      }}
-                    >
-                      #{member.id}
-                    </div>
-                  </div>
-
-                  {/* Name */}
-                  <h3 className="font-pixel text-[9px] sm:text-[10px] text-foreground font-bold tracking-tight uppercase leading-snug">
-                    {member.name}
-                  </h3>
-
-                  {/* Role */}
-                  <p
-                    className="font-retro text-sm font-semibold mt-1 tracking-wide"
-                    style={{ color: member.color }}
-                  >
-                    {member.role}
-                  </p>
-
-                  {/* Division */}
-                  <p className="font-retro text-xs text-muted mt-0.5">
-                    {member.division}
-                  </p>
-
-                  {/* Bio summary */}
-                  <p className="font-retro text-xs text-foreground/80 mt-2.5 leading-relaxed line-clamp-3">
-                    {member.bio}
-                  </p>
-
-                  {/* Active indicator */}
-                  <div className="mt-auto pt-3 flex items-center justify-between border-t border-[#2d2b5a]/60">
-                    <span
-                      className="font-pixel text-[7px] tracking-wider uppercase"
-                      style={{ color: isSelected ? member.color : '#7a78a0' }}
-                    >
-                      {isSelected ? '● SEDANG DILIHAT' : 'LIHAT PROFIL'}
-                    </span>
-                    <span
-                      className="font-pixel text-[8px]"
-                      style={{ color: member.color }}
-                    >
-                      {isSelected ? '▲' : '▸'}
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
           </div>
         </div>
 
