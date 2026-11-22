@@ -33,16 +33,17 @@ export default function Header({ filteredCount, totalCount, onOpenDataNotes }: H
 
   return (
     <>
+      {/* Floating luxury transparent navbar (Louis Vuitton style) */}
       <header
-        className={`sticky top-0 z-40 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
           isScrolled
-            ? 'bg-[#0c0c1d]/95 backdrop-blur-md border-b-2 border-card-border shadow-lg shadow-black/40'
+            ? 'bg-[#0c0c1d]/90 backdrop-blur-md border-b-2 border-card-border shadow-lg shadow-black/50'
             : 'bg-transparent border-b-2 border-transparent shadow-none'
         }`}
       >
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 py-4 sm:py-5 flex items-center justify-between gap-3 sm:gap-4 min-h-[76px]">
           <div className="flex-1 flex justify-start min-w-0">
-            <p className="font-retro text-base sm:text-lg text-muted truncate">
+            <p className="font-retro text-base sm:text-lg text-muted truncate drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
               {'>'} Menampilkan{' '}
               <span className="font-bold text-accent">
                 {filteredCount.toLocaleString()}
@@ -53,10 +54,10 @@ export default function Header({ filteredCount, totalCount, onOpenDataNotes }: H
 
           <div className="text-center flex-shrink-0 px-3">
             <h1 className="font-pixel font-bold leading-tight tracking-wider">
-              <span className="text-[11px] sm:text-[15px] text-primary glow-green block">
+              <span className="text-[11px] sm:text-[15px] text-primary glow-green block drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
                 PENJUALAN VIDEO GAME
               </span>
-              <span className="text-[9px] sm:text-[11px] text-secondary tracking-widest block mt-1">
+              <span className="text-[9px] sm:text-[11px] text-secondary tracking-widest block mt-1 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
                 KRISTAL
               </span>
             </h1>
@@ -65,7 +66,7 @@ export default function Header({ filteredCount, totalCount, onOpenDataNotes }: H
           <div className="flex-1 flex justify-end min-w-0">
             <button
               onClick={handleOpenModal}
-              className="pixel-btn inline-flex items-center gap-1.5 px-3.5 py-2 border-neon-purple bg-neon-purple-glow text-neon-purple font-pixel text-[7.5px] sm:text-[8.5px] hover:bg-neon-purple/20 transition-colors tracking-wider cursor-pointer"
+              className="pixel-btn inline-flex items-center gap-1.5 px-3.5 py-2 border-neon-purple bg-neon-purple-glow text-neon-purple font-pixel text-[7.5px] sm:text-[8.5px] hover:bg-neon-purple/20 transition-colors tracking-wider cursor-pointer shadow-[2px_2px_0_rgba(0,0,0,0.5)]"
             >
               <Info className="w-4 h-4" />
               <span className="hidden sm:inline">CATATAN DATA</span>

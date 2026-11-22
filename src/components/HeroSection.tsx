@@ -37,9 +37,8 @@ export default function HeroSection({
   };
 
   return (
-    <section className="relative overflow-hidden border-b-2 border-card-border bg-[#0a0a18] -mt-[78px] pt-24 sm:pt-28 pb-8 sm:pb-14">
-      {/* Video Background — Khusus dibatasi pada area Hero di atas FILTER DATA */}
-      {/* Zoomed 1.25x agar gap / tepi hitam terpotong rapi dan mengisi penuh area Hero */}
+    <section className="relative overflow-hidden border-b-2 border-card-border bg-[#0a0a18] pt-24 sm:pt-28 pb-8 sm:pb-14">
+      {/* Video Background — Membentang penuh dari puncak layar (y=0) di belakang navbar transparan */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden">
         <video
           ref={videoRef}
@@ -48,13 +47,13 @@ export default function HeroSection({
           muted
           playsInline
           preload="auto"
-          className="w-full h-full object-cover opacity-80 transition-transform duration-300"
+          className="w-full h-full object-cover opacity-85 transition-transform duration-300"
           style={{ transform: 'scale(1.25)', transformOrigin: 'center center' }}
         >
           <source src="/bg-video.mp4" type="video/mp4" />
         </video>
         {/* Dark contrast overlay & arcade ambient lighting */}
-        <div className="absolute inset-0 bg-[#0a0a18]/60 backdrop-blur-[0.5px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a18]/70 via-[#0a0a18]/50 to-[#0a0a18]/80 backdrop-blur-[0.5px]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(0,255,136,0.08),transparent)]" />
       </div>
 
