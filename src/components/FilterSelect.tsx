@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import styles from './FilterBar.module.css';
 
 export interface FilterSelectOption {
   value: string;
@@ -26,25 +25,25 @@ export default function FilterSelect({
   isActive = false,
 }: FilterSelectProps) {
   return (
-    <div className={styles.fieldGroup}>
-      <label htmlFor={id} className={styles.label}>
+    <div className="filter-field-group">
+      <label htmlFor={id} className="filter-label">
         {label}
       </label>
-      <div className={styles.selectWrapper}>
+      <div className="filter-select-wrapper">
         <select
           id={id}
           name={id}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`${styles.select} ${isActive ? styles.selectActive : ''}`}
+          className={`filter-select ${isActive ? 'filter-select-active' : ''}`}
         >
           {options.map((opt) => (
-            <option key={opt.value} value={opt.value} className={styles.option}>
+            <option key={opt.value} value={opt.value} className="filter-option">
               {opt.label}
             </option>
           ))}
         </select>
-        <span className={styles.selectArrow} aria-hidden="true">
+        <span className="filter-select-arrow" aria-hidden="true">
           ▾
         </span>
       </div>

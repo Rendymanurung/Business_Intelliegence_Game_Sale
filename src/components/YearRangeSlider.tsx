@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import styles from './FilterBar.module.css';
 
 export interface YearRangeSliderProps {
   id?: string;
@@ -54,15 +53,15 @@ export default function YearRangeSlider({
   };
 
   return (
-    <div className={styles.fieldGroup}>
-      <label htmlFor={`${id}-min`} className={styles.label}>
+    <div className="filter-field-group">
+      <label htmlFor={`${id}-min`} className="filter-label">
         TAHUN: {yearMin}–{yearMax}
       </label>
-      <div className={styles.sliderControl}>
-        <div className={styles.trackContainer}>
-          <div className={styles.trackBase} />
+      <div className="filter-slider-control">
+        <div className="filter-track-container">
+          <div className="filter-track-base" />
           <div
-            className={styles.trackActive}
+            className="filter-track-active"
             style={{
               left: `${leftPercent}%`,
               width: `${Math.max(0, rightPercent - leftPercent)}%`,
@@ -75,7 +74,7 @@ export default function YearRangeSlider({
             max={maxLimit}
             value={yearMin}
             onChange={handleMinChange}
-            className={styles.rangeInput}
+            className="filter-range-input"
             style={{ zIndex: yearMin > maxLimit - 10 ? 3 : 2 }}
             aria-label="Tahun minimum"
           />
@@ -86,13 +85,13 @@ export default function YearRangeSlider({
             max={maxLimit}
             value={yearMax}
             onChange={handleMaxChange}
-            className={styles.rangeInput}
+            className="filter-range-input"
             style={{ zIndex: 2 }}
             aria-label="Tahun maksimum"
           />
         </div>
 
-        <div className={styles.presetGroup}>
+        <div className="filter-preset-group">
           {PRESETS.map((p) => {
             const isSelected = yearMin === p.min && yearMax === p.max;
             return (
@@ -100,7 +99,7 @@ export default function YearRangeSlider({
                 key={p.label}
                 type="button"
                 onClick={() => handlePresetClick(p.min, p.max)}
-                className={`${styles.presetBtn} ${isSelected ? styles.presetBtnActive : ''}`}
+                className={`filter-preset-btn ${isSelected ? 'filter-preset-active' : ''}`}
                 title={`Pilih rentang ${p.min}–${p.max}`}
               >
                 {p.label}

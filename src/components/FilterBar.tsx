@@ -4,7 +4,6 @@ import React from 'react';
 import { FilterState, RegionKey } from '@/types/vgsales';
 import FilterSelect, { FilterSelectOption } from './FilterSelect';
 import YearRangeSlider from './YearRangeSlider';
-import styles from './FilterBar.module.css';
 
 export interface FilterOptions {
   platformFamilies?: FilterSelectOption[];
@@ -147,17 +146,17 @@ export default function FilterBar({
   const formattedResult = resultCount.toLocaleString('id-ID');
 
   return (
-    <div className={styles.filterBarContainer}>
+    <div className="filter-bar-container">
       {/* Header bar: small title with 1px border-bottom full width */}
-      <div className={styles.filterHeader}>
-        <div className={styles.filterHeaderInner}>
-          <h2 className={styles.filterTitle}>FILTER DATA</h2>
+      <div className="filter-header">
+        <div className="filter-header-inner">
+          <h2 className="filter-title">FILTER DATA</h2>
         </div>
       </div>
 
       {/* Main Grid: Year (Slider), Ecosystem, Platform, Genre, Region, Actions */}
-      <div className={styles.controlsWrapper}>
-        <div className={styles.controlsGrid}>
+      <div className="filter-controls-wrapper">
+        <div className="filter-controls-grid">
           {/* 1. Tahun (Dual Thumb Slider + Presets) */}
           <YearRangeSlider
             id="filter-year"
@@ -212,17 +211,17 @@ export default function FilterBar({
           />
 
           {/* 6. Area Aksi (Hitungan Hasil + Tombol Reset) */}
-          <div className={styles.fieldGroup}>
-            <span className={styles.label}>HASIL</span>
-            <div className={styles.actionGroup}>
-              <div className={styles.resultCount} title="Jumlah game hasil filter">
+          <div className="filter-field-group">
+            <span className="filter-label">HASIL</span>
+            <div className="filter-action-group">
+              <div className="filter-result-count" title="Jumlah game hasil filter">
                 {formattedResult} GAME
               </div>
               <button
                 type="button"
                 onClick={triggerReset}
                 disabled={isDefault}
-                className={styles.resetBtn}
+                className="filter-reset-btn"
                 title={isDefault ? 'Semua filter dalam kondisi default' : 'Kembalikan semua filter ke kondisi awal'}
               >
                 RESET
