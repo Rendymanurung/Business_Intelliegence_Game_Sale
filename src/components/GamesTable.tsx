@@ -62,28 +62,28 @@ export default function GamesTable({ data, region, searchQuery, onSearchChange, 
 
   const columns: { key: SortKey; label: string; align: string }[] = [
     { key: 'Rank', label: '#', align: 'text-center' },
-    { key: 'Year', label: 'Year', align: 'text-center' },
+    { key: 'Year', label: 'Tahun', align: 'text-center' },
     { key: 'Global_Sales', label: 'Global', align: 'text-right' },
     { key: 'NA_Sales', label: 'NA', align: 'text-right' },
     { key: 'EU_Sales', label: 'EU', align: 'text-right' },
     { key: 'JP_Sales', label: 'JP', align: 'text-right' },
-    { key: 'Other_Sales', label: 'Other', align: 'text-right' },
+    { key: 'Other_Sales', label: 'Lainnya', align: 'text-right' },
   ];
 
   return (
     <div className="pixel-card overflow-hidden">
       <div className="px-5 pt-4 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h3 className="font-pixel text-[8px] text-accent tracking-wider">▸ TOP GAMES EVIDENCE TABLE</h3>
+          <h3 className="font-pixel text-[8px] text-accent tracking-wider">▸ TABEL BUKTI GAME TERATAS</h3>
           <p className="font-retro text-sm text-muted mt-0.5">
-            {'>'} {sortedData.length.toLocaleString()} games · Sorted by {columns.find(c => c.key === sortKey)?.label} ({sortAsc ? '▲ asc' : '▼ desc'})
+            {'>'} {sortedData.length.toLocaleString('id-ID')} game · Diurutkan berdasarkan {columns.find(c => c.key === sortKey)?.label} ({sortAsc ? '▲ naik' : '▼ turun'})
           </p>
         </div>
         <div className="relative">
           <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted" />
           <input
             type="text"
-            placeholder="> search title, platform (e.g. PS4), publisher, genre..."
+            placeholder="> cari judul, platform (cth. PS4), penerbit, genre..."
             value={searchQuery}
             onChange={e => { onSearchChange(e.target.value); setPage(0); }}
             className="h-8 pl-8 pr-3 w-full sm:w-80 border-2 border-card-border bg-background text-foreground font-retro text-base placeholder:text-muted/50 focus:outline-none focus:border-primary focus:shadow-[0_0_8px_#00ff8830] transition-all"
@@ -107,10 +107,10 @@ export default function GamesTable({ data, region, searchQuery, onSearchChange, 
                   </span>
                 </th>
               ))}
-              <th className="px-3 py-2 font-pixel text-[7px] text-muted text-left tracking-wider">TITLE</th>
+              <th className="px-3 py-2 font-pixel text-[7px] text-muted text-left tracking-wider">JUDUL</th>
               <th className="px-3 py-2 font-pixel text-[7px] text-muted text-left w-20 tracking-wider">PLAT</th>
               <th className="px-3 py-2 font-pixel text-[7px] text-muted text-left w-24 tracking-wider">GENRE</th>
-              <th className="px-3 py-2 font-pixel text-[7px] text-muted text-left w-28 tracking-wider">PUBLISHER</th>
+              <th className="px-3 py-2 font-pixel text-[7px] text-muted text-left w-28 tracking-wider">PENERBIT</th>
               {columns.slice(1).map(col => (
                 <th
                   key={col.key}
@@ -128,7 +128,7 @@ export default function GamesTable({ data, region, searchQuery, onSearchChange, 
             {pageData.length === 0 ? (
               <tr>
                 <td colSpan={11} className="text-center py-10 text-muted font-retro text-base">
-                  {'>'} No games match your current filters and search.
+                  {'>'} Tidak ada data game yang cocok dengan filter dan pencarian Anda.
                 </td>
               </tr>
             ) : (
@@ -179,7 +179,7 @@ export default function GamesTable({ data, region, searchQuery, onSearchChange, 
       {totalPages > 1 && (
         <div className="px-5 py-3 flex items-center justify-between border-t-2 border-card-border">
           <p className="font-retro text-sm text-muted">
-            PAGE {currentPage + 1} OF {totalPages}
+            HALAMAN {currentPage + 1} DARI {totalPages}
           </p>
           <div className="flex items-center gap-1">
             <button

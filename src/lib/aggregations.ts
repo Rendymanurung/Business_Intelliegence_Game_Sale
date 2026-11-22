@@ -11,10 +11,10 @@ import {
 
 const REGION_LABELS: Record<RegionKey, string> = {
   Global: 'Global',
-  NA: 'North America',
-  EU: 'Europe',
-  JP: 'Japan',
-  Other: 'Rest of World',
+  NA: 'Amerika Utara (NA)',
+  EU: 'Eropa (EU)',
+  JP: 'Jepang (JP)',
+  Other: 'Wilayah Lainnya',
 };
 
 export function getRegionLabel(region: RegionKey): string {

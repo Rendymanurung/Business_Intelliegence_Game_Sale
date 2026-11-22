@@ -29,8 +29,8 @@ function CustomTooltip({ active, payload }: { active?: boolean; payload?: Array<
   return (
     <div className="pixel-card px-3 py-2 font-retro text-sm border-neon-purple">
       <p className="font-pixel text-[7px] text-neon-purple mb-1">{d.name}</p>
-      <p className="text-foreground/90"><span className="text-primary">►</span> Sales: {formatNumber(d.sales)}M copies</p>
-      <p className="text-foreground/90"><span className="text-accent">►</span> Titles: {d.titles.toLocaleString()}</p>
+      <p className="text-foreground/90"><span className="text-primary">►</span> Penjualan: {formatNumber(d.sales)}M kopi</p>
+      <p className="text-foreground/90"><span className="text-accent">►</span> Judul Game: {d.titles.toLocaleString('id-ID')}</p>
     </div>
   );
 }
@@ -45,9 +45,9 @@ export default function CompetitiveLandscapeChart({
   const [tab, setTab] = useState<TabKey>('publishers');
 
   const tabs: { key: TabKey; label: string }[] = [
-    { key: 'publishers', label: 'PUBLISHERS' },
-    { key: 'platformFamily', label: 'ECOSYSTEMS' },
-    { key: 'platforms', label: 'PLATFORMS' },
+    { key: 'publishers', label: 'PENERBIT' },
+    { key: 'platformFamily', label: 'EKOSISTEM' },
+    { key: 'platforms', label: 'PLATFORM' },
   ];
 
   const currentData = tab === 'publishers' ? publishers
@@ -55,10 +55,10 @@ export default function CompetitiveLandscapeChart({
     : topPlatforms;
 
   const subtitle = tab === 'publishers'
-    ? `${regionLabel} · Top 5: ${top5Share}% · Top 10: ${top10Share}% (Pareto)`
+    ? `${regionLabel} · 5 Teratas: ${top5Share}% · 10 Teratas: ${top10Share}% (Pareto)`
     : tab === 'platformFamily'
-    ? (activePlatformFamily ? `${regionLabel} · Active: ${activePlatformFamily} (click to toggle off)` : `${regionLabel} · Click a bar to cross-filter by ecosystem`)
-    : (activePlatform ? `${regionLabel} · Active: ${activePlatform} (click to toggle off)` : `${regionLabel} · Individual platform performance (click to cross-filter)`);
+    ? (activePlatformFamily ? `${regionLabel} · Aktif: ${activePlatformFamily} (klik untuk batal)` : `${regionLabel} · Klik batang untuk cross-filter berdasarkan ekosistem`)
+    : (activePlatform ? `${regionLabel} · Aktif: ${activePlatform} (klik untuk batal)` : `${regionLabel} · Kinerja platform perangkat keras (klik untuk cross-filter)`);
 
   const barColor = tab === 'publishers' ? '#c678dd'
     : tab === 'platformFamily' ? '#00ccff'
@@ -66,7 +66,7 @@ export default function CompetitiveLandscapeChart({
 
   return (
     <ChartCard
-      title="Competitive Landscape"
+      title="Peta Persaingan Pasar"
       subtitle={subtitle}
       headerRight={
         <div className="flex border-2 border-card-border overflow-hidden">

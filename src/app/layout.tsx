@@ -15,14 +15,14 @@ const vt323 = VT323({
 });
 
 export const metadata: Metadata = {
-  title: "Video Game Sales KRISTAL (1980-2016)",
-  description: "Retro pixel BI dashboard analyzing 16,322 video game titles across platforms, genres, and global regions.",
+  title: "Intelijen Penjualan Video Game KRISTAL (1980-2016)",
+  description: "Dashboard Business Intelligence retro pixel yang menganalisis 16.322 judul video game lintas platform, genre, dan wilayah global.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-      lang="en"
+      lang="id"
       className={`${pressStart.variable} ${vt323.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground retro-bg">

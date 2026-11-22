@@ -24,7 +24,7 @@ interface RegionalGenreChartProps {
 function CustomTooltip({ active, payload, label }: { active?: boolean; payload?: Array<{ value: number; dataKey: string; color: string }>; label?: string }) {
   if (!active || !payload?.length) return null;
   const regionNames: Record<string, string> = {
-    NA: 'North America (NA)', EU: 'Europe (EU)', JP: 'Japan (JP)', Other: 'Other',
+    NA: 'Amerika Utara (NA)', EU: 'Eropa (EU)', JP: 'Jepang (JP)', Other: 'Wilayah Lainnya',
   };
   return (
     <div className="pixel-card px-3 py-2 font-retro text-sm border-secondary">
@@ -51,21 +51,21 @@ export default function RegionalGenreChart({ data, activeGenre, onGenreClick }: 
 
   return (
     <ChartCard
-      title="Regional Genre Preference"
-      subtitle={activeGenre ? `Showing all genres · Active: ${activeGenre} (click to toggle off)` : 'NA vs EU vs JP vs Other — click a bar to cross-filter'}
+      title="Preferensi Genre Antarwilayah"
+      subtitle={activeGenre ? `Menampilkan semua genre · Aktif: ${activeGenre} (klik untuk batal)` : 'Perbandingan NA vs EU vs JP vs Lainnya — klik batang untuk cross-filter'}
       headerRight={
         <div className="flex border-2 border-card-border overflow-hidden">
           <button
             onClick={() => setMode('absolute')}
             className={`px-2.5 py-1 font-pixel text-[7px] transition-colors tracking-wider ${mode === 'absolute' ? 'bg-primary text-background' : 'bg-card text-muted hover:text-foreground'}`}
           >
-            SALES
+            PENJUALAN
           </button>
           <button
             onClick={() => setMode('percent')}
             className={`px-2.5 py-1 font-pixel text-[7px] transition-colors tracking-wider ${mode === 'percent' ? 'bg-primary text-background' : 'bg-card text-muted hover:text-foreground'}`}
           >
-            SHARE%
+            PANGSA %
           </button>
         </div>
       }
@@ -100,8 +100,8 @@ export default function RegionalGenreChart({ data, activeGenre, onGenreClick }: 
             wrapperStyle={{ fontSize: 12, fontFamily: 'var(--font-vt323)' }}
             formatter={(value: string) => {
               const labels: Record<string, string> = {
-                NA: 'North America (NA)', EU: 'Europe (EU)', JP: 'Japan (JP)', Other: 'Other',
-                NA_pct: 'North America (NA)', EU_pct: 'Europe (EU)', JP_pct: 'Japan (JP)', Other_pct: 'Other',
+                NA: 'Amerika Utara (NA)', EU: 'Eropa (EU)', JP: 'Jepang (JP)', Other: 'Wilayah Lainnya',
+                NA_pct: 'Amerika Utara (NA)', EU_pct: 'Eropa (EU)', JP_pct: 'Jepang (JP)', Other_pct: 'Wilayah Lainnya',
               };
               return labels[value] || value;
             }}

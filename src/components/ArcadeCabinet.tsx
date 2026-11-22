@@ -40,8 +40,8 @@ export default function ArcadeCabinet({
       <div className="absolute w-56 h-56 bg-secondary/10 rounded-full blur-2xl pointer-events-none translate-y-12" />
 
       {/* Floating retro badge */}
-      <div className="absolute -top-3 -right-2 sm:right-4 z-20 px-2.5 py-1 border-2 border-accent bg-card text-accent font-pixel text-[7px] sm:text-[8px] tracking-wider shadow-[0_0_12px_#ffd70040] animate-bounce">
-        ★ ARCADE EDITION ★
+      <div className="absolute -top-3 -right-2 sm:right-4 z-20 px-2.5 py-1 border-2 border-accent bg-card text-accent font-pixel text-[7px] sm:text-[8.5px] tracking-wider shadow-[0_0_12px_#ffd70040] animate-bounce">
+        ★ EDISI ARCADE ★
       </div>
 
       {/* Main Arcade Cabinet Body */}
@@ -84,8 +84,8 @@ export default function ArcadeCabinet({
 
               {/* CRT Header: High Score */}
               <div className="relative z-10 flex items-center justify-between text-[7px] sm:text-[8px] border-b border-card-border/40 pb-1">
-                <span className="text-rose">1UP <span className="text-foreground">{totalGames}</span></span>
-                <span className="text-accent">HIGH SCORE: {totalSales}</span>
+                <span className="text-rose">1UP <span className="text-foreground">{totalGames.toLocaleString('id-ID')}</span></span>
+                <span className="text-accent">SKOR TERTINGGI: {totalSales}</span>
               </div>
 
               {/* CRT Center: Animated Mini Game / Retro Analytics Display */}
@@ -100,18 +100,18 @@ export default function ArcadeCabinet({
                 </div>
 
                 <p className="text-[8px] sm:text-[9px] text-primary tracking-widest glow-green font-bold">
-                  BI SALES INTELLIGENCE
+                  INTELIJEN PENJUALAN BI
                 </p>
                 <p className="font-retro text-xs text-muted mt-0.5">
-                  INSERT COIN FOR FULL ANALYTICS
+                  MASUKKAN KOIN UNTUK ANALITIK LENGKAP
                 </p>
               </div>
 
               {/* CRT Footer: Credits & Blinking Start */}
               <div className="relative z-10 flex items-center justify-between text-[6.5px] sm:text-[7.5px] border-t border-card-border/40 pt-1 text-muted">
-                <span className="text-secondary">CREDIT {String(credits).padStart(2, '0')}</span>
+                <span className="text-secondary">KREDIT {String(credits).padStart(2, '0')}</span>
                 <span className="text-primary animate-pulse">
-                  {coinInserted ? '★ READY PLAYER 1 ★' : '▶ PRESS START ◀'}
+                  {coinInserted ? '★ PEMAIN 1 SIAP ★' : '▶ TEKAN START ◀'}
                 </span>
               </div>
             </div>
@@ -232,20 +232,20 @@ export default function ArcadeCabinet({
               <div className="w-7 h-5 bg-gradient-to-b from-orange-500 to-amber-700 border border-orange-400 rounded flex items-center justify-center shadow-[inset_0_0_4px_rgba(0,0,0,0.5)] group-hover:brightness-125">
                 <span className="font-pixel text-[5px] text-white font-bold">25¢</span>
               </div>
-              <span className="font-pixel text-[4.5px] text-muted mt-0.5">INSERT</span>
+              <span className="font-pixel text-[4.5px] text-muted mt-0.5">MASUKKAN</span>
             </button>
 
             <button
               type="button"
               onClick={handleCoinClick}
               className="group flex flex-col items-center justify-center w-12 h-14 bg-[#18172c] border-2 border-[#2d2b52] rounded hover:border-accent transition-all cursor-pointer"
-              title="Click to Insert Coin (25¢)"
+              title="Klik untuk Masukkan Koin (25¢)"
             >
               <div className="w-6 h-1 bg-black rounded border-b border-gray-700 mb-1" />
               <div className="w-7 h-5 bg-gradient-to-b from-orange-500 to-amber-700 border border-orange-400 rounded flex items-center justify-center shadow-[inset_0_0_4px_rgba(0,0,0,0.5)] group-hover:brightness-125">
                 <span className="font-pixel text-[5px] text-white font-bold">25¢</span>
               </div>
-              <span className="font-pixel text-[4.5px] text-muted mt-0.5">INSERT</span>
+              <span className="font-pixel text-[4.5px] text-muted mt-0.5">MASUKKAN</span>
             </button>
           </div>
 

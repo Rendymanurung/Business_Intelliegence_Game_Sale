@@ -28,9 +28,9 @@ function CustomTooltip({ active, payload }: { active?: boolean; payload?: Array<
   return (
     <div className="pixel-card px-3 py-2 font-retro text-sm border-accent">
       <p className="font-pixel text-[7px] text-accent mb-1">{d.genre}</p>
-      <p className="text-foreground/90"><span className="text-primary">►</span> Titles: {d.titles.toLocaleString()}</p>
-      <p className="text-foreground/90"><span className="text-secondary">►</span> Avg Sales: {formatNumber(d.avgSales)}M</p>
-      <p className="text-foreground/90"><span className="text-accent">►</span> Total: {formatNumber(d.totalSales)}M</p>
+      <p className="text-foreground/90"><span className="text-primary">►</span> Judul Game: {d.titles.toLocaleString('id-ID')}</p>
+      <p className="text-foreground/90"><span className="text-secondary">►</span> Rata-rata Penjualan: {formatNumber(d.avgSales)}M</p>
+      <p className="text-foreground/90"><span className="text-accent">►</span> Total Penjualan: {formatNumber(d.totalSales)}M</p>
     </div>
   );
 }
@@ -52,8 +52,8 @@ export default function GenreScatterChart({ data, activeGenre, onGenreClick, reg
 
   return (
     <ChartCard
-      title="Genre Competitiveness: Volume vs Efficiency"
-      subtitle={activeGenre ? `${regionLabel} · Active: ${activeGenre} (click to toggle off)` : `${regionLabel} — Bubble size = total sales. Click to cross-filter.`}
+      title="Matriks Daya Saing Genre: Volume vs Efisiensi"
+      subtitle={activeGenre ? `${regionLabel} · Aktif: ${activeGenre} (klik untuk batal)` : `${regionLabel} — Ukuran gelembung = total penjualan. Klik untuk cross-filter.`}
     >
       <ResponsiveContainer width="100%" height={320}>
         <ScatterChart margin={{ top: 28, right: 20, left: 0, bottom: 5 }}>
@@ -61,32 +61,32 @@ export default function GenreScatterChart({ data, activeGenre, onGenreClick, reg
           <XAxis
             type="number"
             dataKey="titles"
-            name="Titles"
+            name="Judul Game"
             tick={{ fontSize: 12, fill: '#a09bbe', fontFamily: 'var(--font-vt323)' }}
             tickLine={false}
             axisLine={{ stroke: '#2d2b5a' }}
-            label={{ value: 'Number of Titles', position: 'insideBottom', offset: -2, style: { fontSize: 12, fill: '#a09bbe', fontFamily: 'var(--font-vt323)' } }}
+            label={{ value: 'Jumlah Judul Game', position: 'insideBottom', offset: -2, style: { fontSize: 12, fill: '#a09bbe', fontFamily: 'var(--font-vt323)' } }}
           />
           <YAxis
             type="number"
             dataKey="avgSales"
-            name="Avg Sales"
+            name="Rata-rata Penjualan"
             tick={{ fontSize: 12, fill: '#a09bbe', fontFamily: 'var(--font-vt323)' }}
             tickLine={false}
             axisLine={false}
             tickFormatter={v => `${v}M`}
             domain={[0, (dataMax: number) => Math.ceil(dataMax * 1.15 * 100) / 100]}
-            label={{ value: 'Avg Sales/Title (M)', angle: -90, position: 'insideLeft', style: { fontSize: 12, fill: '#a09bbe', fontFamily: 'var(--font-vt323)' }, offset: 10 }}
+            label={{ value: 'Rata-rata Penjualan/Judul (Juta)', angle: -90, position: 'insideLeft', style: { fontSize: 12, fill: '#a09bbe', fontFamily: 'var(--font-vt323)' }, offset: 10 }}
           />
           <ZAxis type="number" dataKey="totalSales" range={[200, 2000]} domain={[0, maxBubble]} />
           <Tooltip content={<CustomTooltip />} cursor={{ strokeDasharray: '3 3', stroke: 'rgba(0, 255, 170, 0.4)' }} />
           <ReferenceLine
             x={avgTitles} stroke="#7a78a0" strokeDasharray="4 4" strokeWidth={1}
-            label={{ value: 'Avg Volume', position: 'top', style: { fontSize: 10, fill: '#a09bbe' } }}
+            label={{ value: 'Rata-rata Volume', position: 'top', style: { fontSize: 10, fill: '#a09bbe' } }}
           />
           <ReferenceLine
             y={avgSalesPerTitle} stroke="#7a78a0" strokeDasharray="4 4" strokeWidth={1}
-            label={{ value: 'Avg Efficiency', position: 'right', style: { fontSize: 10, fill: '#a09bbe' } }}
+            label={{ value: 'Rata-rata Efisiensi', position: 'right', style: { fontSize: 10, fill: '#a09bbe' } }}
           />
           <Scatter
             data={data}

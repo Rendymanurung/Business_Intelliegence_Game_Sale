@@ -121,7 +121,7 @@ export default function DashboardPage() {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen gap-4">
         <Loader2 className="w-8 h-8 text-primary animate-spin" />
-        <p className="font-pixel text-[9px] text-primary tracking-wider">LOADING 16,322 RECORDS...</p>
+        <p className="font-pixel text-[9px] text-primary tracking-wider">MEMUAT 16.322 DATA PENJUALAN...</p>
         <div className="w-48 h-3 border-2 border-primary bg-background overflow-hidden">
           <div className="h-full bg-primary animate-pulse" style={{ width: '60%' }} />
         </div>
@@ -135,9 +135,9 @@ export default function DashboardPage() {
         <div className="w-16 h-16 border-2 border-rose bg-rose-light flex items-center justify-center box-glow-pink">
           <span className="font-pixel text-xl text-rose">!!</span>
         </div>
-        <p className="font-pixel text-[9px] text-rose tracking-wider">SYSTEM ERROR</p>
+        <p className="font-pixel text-[9px] text-rose tracking-wider">KESALAHAN SISTEM</p>
         <p className="font-retro text-base text-muted max-w-md text-center">
-          {'>'} Could not fetch /data/vgsales_clean.json — {error}
+          {'>'} Gagal mengambil data /data/vgsales_clean.json — {error}
         </p>
       </div>
     );
@@ -222,10 +222,10 @@ export default function DashboardPage() {
             <span className="text-rose">■</span>
           </p>
           <p className="font-retro text-sm text-muted mt-2">
-            {'>'} VIDEO GAME SALES BI DASHBOARD · 1980–2016 · NEXT.JS + RECHARTS + TAILWIND
+            {'>'} DASHBOARD BUSINESS INTELLIGENCE PENJUALAN VIDEO GAME · 1980–2016 · NEXT.JS + RECHARTS + TAILWIND
           </p>
           <p className="font-pixel text-[6px] text-muted/50 mt-1 tracking-widest">
-            INSERT COIN TO CONTINUE
+            MASUKKAN KOIN UNTUK MELANJUTKAN
           </p>
         </footer>
       </main>

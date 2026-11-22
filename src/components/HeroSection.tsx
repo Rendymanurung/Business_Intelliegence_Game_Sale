@@ -42,25 +42,25 @@ export default function HeroSection({
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-ping" />
               <span>KRISTAL BI WORKBENCH</span>
               <span className="text-muted">·</span>
-              <span className="text-accent">1980–2016 ARCHIVE</span>
+              <span className="text-accent">ARSIP 1980–2016</span>
             </div>
 
             {/* Main Headline (Brex-scale, Retro-crafted) */}
             <h1 className="font-pixel font-bold tracking-tight text-left leading-[1.3] sm:leading-[1.25]">
               <span className="block text-[18px] sm:text-[28px] md:text-[34px] text-foreground">
-                GAMING HISTORY BUILT FOR
+                SEJARAH VIDEO GAME UNTUK
               </span>
               <span className="block text-[18px] sm:text-[28px] md:text-[34px] text-primary glow-green mt-1">
-                SPEED AND INSIGHT.
+                KECEPATAN DAN KONTROL.
               </span>
             </h1>
 
             {/* Subhead Description */}
             <p className="font-retro text-base sm:text-xl text-muted leading-relaxed max-w-2xl">
-              Precision Business Intelligence workbench analyzing{' '}
-              <span className="text-foreground font-semibold">16,322 verified titles</span>,{' '}
-              <span className="text-foreground font-semibold">31 hardware platforms</span>, and{' '}
-              <span className="text-foreground font-semibold">8,820.01 Million</span> global unit sales from the 8-bit golden age to the HD console boom.
+              Platform Business Intelligence presisi untuk menganalisis{' '}
+              <span className="text-foreground font-semibold">16.322 judul game terverifikasi</span>,{' '}
+              <span className="text-foreground font-semibold">31 platform perangkat keras</span>, dan{' '}
+              <span className="text-foreground font-semibold">8.820,01 juta</span> total penjualan unit global dari era keemasan 8-bit hingga revolusi konsol HD.
             </p>
 
             {/* Action Row: Search input + CTA Button (Brex email capture style) */}
@@ -72,7 +72,7 @@ export default function HeroSection({
                     type="text"
                     value={searchQuery}
                     onChange={e => onSearchChange(e.target.value)}
-                    placeholder="> Search title, platform (PS4, NES), publisher..."
+                    placeholder="> Cari judul game, platform (PS4, NES), penerbit..."
                     className="w-full h-11 pl-9 pr-3 bg-transparent text-foreground font-retro text-base sm:text-lg placeholder:text-muted/60 focus:outline-none"
                   />
                 </div>
@@ -80,7 +80,7 @@ export default function HeroSection({
                   type="submit"
                   className="pixel-btn h-11 px-5 border-primary bg-primary text-background font-pixel text-[8px] sm:text-[9px] hover:bg-primary/90 flex items-center justify-center gap-1.5 transition-colors tracking-wider flex-shrink-0 cursor-pointer"
                 >
-                  <span>EXPLORE DATA</span>
+                  <span>JELAJAHI DATA</span>
                   <ChevronRight className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -94,7 +94,7 @@ export default function HeroSection({
                 className="inline-flex items-center gap-1.5 text-accent hover:text-accent/80 hover:underline transition-colors cursor-pointer"
               >
                 <FileText className="w-4 h-4" />
-                <span>See Data Governance & Notes</span>
+                <span>Lihat Tata Kelola & Catatan Data</span>
               </button>
               
               <button
@@ -103,23 +103,23 @@ export default function HeroSection({
                 className="inline-flex items-center gap-1.5 text-muted hover:text-primary transition-colors cursor-pointer"
               >
                 <ArrowDown className="w-4 h-4" />
-                <span>Jump straight to charts & tables</span>
+                <span>Langsung ke grafik & tabel analitik</span>
               </button>
             </div>
 
             {/* Quick Metrics Badges */}
             <div className="flex flex-wrap items-center gap-2 pt-2">
               <div className="px-2.5 py-1 border border-card-border bg-card font-retro text-xs sm:text-sm text-muted">
-                Sales: <span className="text-primary font-bold">8,820.01M</span>
+                Penjualan: <span className="text-primary font-bold">8.820,01M</span>
               </div>
               <div className="px-2.5 py-1 border border-card-border bg-card font-retro text-xs sm:text-sm text-muted">
-                Titles: <span className="text-secondary font-bold">16,322</span>
+                Judul Game: <span className="text-secondary font-bold">16.322</span>
               </div>
               <div className="px-2.5 py-1 border border-card-border bg-card font-retro text-xs sm:text-sm text-muted">
-                Platforms: <span className="text-accent font-bold">31 Active</span>
+                Platform: <span className="text-accent font-bold">31 Aktif</span>
               </div>
               <div className="px-2.5 py-1 border border-card-border bg-card font-retro text-xs sm:text-sm text-muted">
-                Eras: <span className="text-rose font-bold">1980–2016</span>
+                Era: <span className="text-rose font-bold">1980–2016</span>
               </div>
             </div>
 

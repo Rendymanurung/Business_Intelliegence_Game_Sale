@@ -148,18 +148,18 @@ export function useVGSalesData() {
 
   const activeFilterChips = useMemo(() => {
     const chips: { label: string; key: keyof FilterState; value: string }[] = [];
-    if (filters.decade !== 'All') chips.push({ label: `Decade: ${filters.decade}`, key: 'decade', value: 'All' });
+    if (filters.decade !== 'All') chips.push({ label: `Dekade: ${filters.decade}`, key: 'decade', value: 'All' });
     if (filters.yearMin !== 1980 || filters.yearMax !== 2016)
-      chips.push({ label: `Years: ${filters.yearMin}–${filters.yearMax}`, key: 'yearMin', value: '1980' });
-    if (filters.platformFamily !== 'All') chips.push({ label: `Ecosystem: ${filters.platformFamily}`, key: 'platformFamily', value: 'All' });
+      chips.push({ label: `Tahun: ${filters.yearMin}–${filters.yearMax}`, key: 'yearMin', value: '1980' });
+    if (filters.platformFamily !== 'All') chips.push({ label: `Ekosistem: ${filters.platformFamily}`, key: 'platformFamily', value: 'All' });
     if (filters.platform !== 'All') chips.push({ label: `Platform: ${filters.platform}`, key: 'platform', value: 'All' });
     if (filters.genre !== 'All') chips.push({ label: `Genre: ${filters.genre}`, key: 'genre', value: 'All' });
-    if (filters.region !== 'Global') chips.push({ label: `Region: ${filters.region}`, key: 'region', value: 'Global' as RegionKey });
-    if (filters.crossFilterGenre) chips.push({ label: `Genre (chart): ${filters.crossFilterGenre}`, key: 'crossFilterGenre', value: '' });
-    if (filters.crossFilterPlatformFamily) chips.push({ label: `Ecosystem (chart): ${filters.crossFilterPlatformFamily}`, key: 'crossFilterPlatformFamily', value: '' });
-    if (filters.crossFilterPlatform) chips.push({ label: `Platform (chart): ${filters.crossFilterPlatform}`, key: 'crossFilterPlatform', value: '' });
-    if (filters.crossFilterPublisher) chips.push({ label: `Publisher (chart): ${filters.crossFilterPublisher}`, key: 'crossFilterPublisher', value: '' });
-    if (filters.searchQuery) chips.push({ label: `Search: "${filters.searchQuery}"`, key: 'searchQuery', value: '' });
+    if (filters.region !== 'Global') chips.push({ label: `Wilayah: ${filters.region}`, key: 'region', value: 'Global' as RegionKey });
+    if (filters.crossFilterGenre) chips.push({ label: `Genre (grafik): ${filters.crossFilterGenre}`, key: 'crossFilterGenre', value: '' });
+    if (filters.crossFilterPlatformFamily) chips.push({ label: `Ekosistem (grafik): ${filters.crossFilterPlatformFamily}`, key: 'crossFilterPlatformFamily', value: '' });
+    if (filters.crossFilterPlatform) chips.push({ label: `Platform (grafik): ${filters.crossFilterPlatform}`, key: 'crossFilterPlatform', value: '' });
+    if (filters.crossFilterPublisher) chips.push({ label: `Penerbit (grafik): ${filters.crossFilterPublisher}`, key: 'crossFilterPublisher', value: '' });
+    if (filters.searchQuery) chips.push({ label: `Pencarian: "${filters.searchQuery}"`, key: 'searchQuery', value: '' });
     return chips;
   }, [filters]);
 
