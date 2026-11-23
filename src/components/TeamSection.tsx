@@ -244,7 +244,7 @@ export default function TeamSection() {
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-8 sm:mb-10">
           <h2 className="font-pixel text-[18px] sm:text-[24px] md:text-[28px] text-foreground tracking-tight leading-snug">
-            TIM PENGEMBANG
+            TIM PENGEMBANG <span className="text-primary glow-green">KRISTAL</span>
           </h2>
         </div>
 
