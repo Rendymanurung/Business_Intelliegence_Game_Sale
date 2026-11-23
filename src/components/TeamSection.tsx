@@ -242,18 +242,10 @@ export default function TeamSection() {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 relative z-10">
 
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-8 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 border border-primary/40 bg-primary/10 text-primary font-pixel text-[8px] sm:text-[9px] tracking-widest uppercase mb-3">
-            <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
+        <div className="flex flex-col items-center text-center mb-8 sm:mb-10">
+          <h2 className="font-pixel text-[18px] sm:text-[24px] md:text-[28px] text-foreground tracking-tight leading-snug">
             TIM PENGEMBANG
-          </div>
-          <h2 className="font-pixel text-[15px] sm:text-[22px] md:text-[26px] text-foreground tracking-tight leading-snug">
-            KOLABORASI DI BALIK{' '}
-            <span className="text-primary glow-green">KRISTAL BI</span>
           </h2>
-          <p className="font-retro text-base sm:text-lg text-muted max-w-2xl mt-2 leading-relaxed">
-            {'>'} 5 anggota tim pengembang platform analitik video game 1980-2016.
-          </p>
         </div>
 
         {/* 3D Character Carousel Stage */}
@@ -276,12 +268,6 @@ export default function TeamSection() {
           <div className="absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-[#0d0d24] to-transparent z-20 pointer-events-none" />
           <div className="absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-[#0d0d24] to-transparent z-20 pointer-events-none" />
 
-          {/* Interactive instruction pill */}
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
-            <span className="font-pixel text-[7px] sm:text-[8px] text-muted/70 bg-[#161630]/80 border border-card-border px-3 py-1 tracking-wider uppercase backdrop-blur-sm">
-              GESER / KLIK UNTUK MEMILIH ANGGOTA
-            </span>
-          </div>
 
           {/* 3D Deck container */}
           <div
