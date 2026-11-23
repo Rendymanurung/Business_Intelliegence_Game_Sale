@@ -20,10 +20,6 @@ export default function ArcadeCabinet({
       <div className="absolute w-72 h-80 sm:w-96 sm:h-96 bg-primary/15 rounded-full blur-3xl pointer-events-none group-hover:bg-primary/25 transition-all duration-500" />
       <div className="absolute w-56 h-56 bg-secondary/15 rounded-full blur-2xl pointer-events-none translate-y-12 group-hover:bg-secondary/25 transition-all duration-500" />
 
-      {/* Floating retro badge */}
-      <div className="absolute -top-3 -right-2 sm:right-2 z-20 px-2.5 py-1 border-2 border-accent bg-card text-accent font-pixel text-[7px] sm:text-[8.5px] tracking-wider shadow-[0_0_12px_#ffd70040] animate-bounce">
-        ★ EDISI ARCADE ★
-      </div>
 
       {/* Realistic 3D Arcade Cabinet (Gambar Pengguna) */}
       <div
