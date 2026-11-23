@@ -46,7 +46,7 @@ export default function KPICards({ kpi }: KPICardsProps) {
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 md:gap-8">
       {cards.map((card, i) => (
         <div
           key={i}

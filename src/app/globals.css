@@ -255,7 +255,7 @@ rect:focus {
 .filter-controls-grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 16px;
+  gap: 22px;
   align-items: end;
 }
 
