@@ -231,7 +231,7 @@ export default function TeamSection() {
   return (
     <section
       id="tim-pengembang"
-      className="relative bg-[#0c0c1d] border-b-2 border-card-border py-14 sm:py-20 overflow-hidden select-none"
+      className="relative bg-[#0c0c1d] border-b-2 border-card-border pt-20 sm:pt-28 pb-16 sm:pb-24 overflow-hidden select-none"
     >
       {/* Background ambient lighting */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -242,9 +242,10 @@ export default function TeamSection() {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 relative z-10">
 
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-8 sm:mb-10">
-          <h2 className="font-pixel text-[18px] sm:text-[24px] md:text-[28px] text-foreground tracking-tight leading-snug">
-            TIM PENGEMBANG <span className="text-primary glow-green">KRISTAL</span>
+        <div className="flex flex-col items-center text-center mb-10 sm:mb-14">
+          <h2 className="font-pixel text-[18px] sm:text-[24px] md:text-[28px] text-foreground tracking-tight leading-snug inline-flex items-center justify-center gap-4 sm:gap-6 flex-wrap">
+            <span>TIM PENGEMBANG</span>
+            <span className="text-primary glow-green">KRISTAL</span>
           </h2>
         </div>
 
