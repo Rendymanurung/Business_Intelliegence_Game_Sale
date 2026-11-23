@@ -44,7 +44,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: '05',
     name: 'Michael Garcia',
     nim: '241401069',
-    avatar: '/team/member5.jpg',
+    avatar: '/team/michael-garcia.jpg',
     color: '#c678dd',
   },
 ];
@@ -314,6 +314,7 @@ export default function TeamSection() {
                     src={member.avatar}
                     alt={`Foto profil ${member.name}`}
                     fill
+                    unoptimized
                     sizes="(max-width: 768px) 210px, 240px"
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                     priority={idx < 3}
