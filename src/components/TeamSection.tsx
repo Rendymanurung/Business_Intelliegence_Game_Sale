@@ -16,7 +16,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: '01',
     name: 'Rendy Manurung',
     nim: '241401090',
-    avatar: '/team/member1.jpg',
+    avatar: '/team/rendy-manurung.jpg',
     color: '#00ff88',
   },
   {
