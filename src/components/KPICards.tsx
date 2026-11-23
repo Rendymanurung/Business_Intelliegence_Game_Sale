@@ -46,13 +46,13 @@ export default function KPICards({ kpi }: KPICardsProps) {
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 md:gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10">
       {cards.map((card, i) => (
         <div
           key={i}
-          className={`pixel-card p-4 sm:p-5 ${card.borderColor} ${card.glowClass} text-center flex flex-col items-center justify-center min-h-[105px] hover:translate-y-[-2px] transition-transform`}
+          className={`pixel-card p-5 sm:p-7 ${card.borderColor} ${card.glowClass} text-center flex flex-col items-center justify-center min-h-[120px] hover:translate-y-[-2px] transition-transform`}
         >
-          <span className={`font-pixel text-[8.5px] sm:text-[10px] font-bold ${card.labelColor} uppercase tracking-wider leading-snug mb-2`}>
+          <span className={`font-pixel text-[8.5px] sm:text-[10px] font-bold ${card.labelColor} uppercase tracking-wider leading-snug mb-3`}>
             {card.title}
           </span>
           <p className={`font-retro text-2xl sm:text-3xl font-bold ${card.valueColor} leading-tight truncate`}>

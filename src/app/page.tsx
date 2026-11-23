@@ -163,7 +163,7 @@ export default function DashboardPage() {
 
       <TeamSection />
 
-      <div id="analytics-dashboard" className="scroll-mt-24 pt-4 sm:pt-8">
+      <div id="analytics-dashboard" className="scroll-mt-24 pt-10 sm:pt-16 pb-2">
         <FilterBar
           filters={filters}
           onChange={updateFilter}
@@ -173,14 +173,14 @@ export default function DashboardPage() {
         />
       </div>
 
-      <main className="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8 sm:space-y-12">
+      <main className="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 pt-10 sm:pt-16 pb-16 sm:pb-24 space-y-12 sm:space-y-16">
         {filteredData.length === 0 ? (
           <EmptyState onReset={resetFilters} />
         ) : (
           <>
             <KPICards kpi={kpi} regionIsGlobal={region === 'Global'} />
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
               <IndustryLifecycleChart data={yearlyData} regionLabel={regionLabel} />
               <RegionalGenreChart
                 data={genreRegionalData}
