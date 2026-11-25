@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect } from 'react';
+import Image from 'next/image';
 import ArcadeCabinet from './ArcadeCabinet';
 
 interface HeroSectionProps {
@@ -20,56 +21,87 @@ export default function HeroSection({
 
   useEffect(() => {
     const video = videoRef.current;
-    if (video) {
-      video.defaultMuted = true;
-      video.muted = true;
-      const playVideo = () => {
+    if (!video) return;
+
+    video.defaultMuted = true;
+    video.muted = true;
+
+    const ensurePlay = () => {
+      if (video.paused) {
+        video.muted = true;
         video.play().catch(() => {});
-      };
-      if (video.readyState >= 2) {
-        playVideo();
-      } else {
-        video.addEventListener('loadeddata', playVideo, { once: true });
-        video.addEventListener('canplay', playVideo, { once: true });
       }
+    };
 
-      // Fallback autoplay if browser requires user interaction first
-      const handleUserGesture = () => {
-        if (video.paused) {
-          video.play().catch(() => {});
-        }
-      };
-      window.addEventListener('scroll', handleUserGesture, { once: true });
-      window.addEventListener('click', handleUserGesture, { once: true });
-      window.addEventListener('touchstart', handleUserGesture, { once: true });
-
-      return () => {
-        window.removeEventListener('scroll', handleUserGesture);
-        window.removeEventListener('click', handleUserGesture);
-        window.removeEventListener('touchstart', handleUserGesture);
-      };
+    if (video.readyState >= 2) {
+      ensurePlay();
+    } else {
+      video.addEventListener('loadeddata', ensurePlay, { once: true });
+      video.addEventListener('canplay', ensurePlay, { once: true });
     }
+
+    // Resume playback if browser paused video on tab switch / background throttling
+    const handleVisibility = () => {
+      if (!document.hidden) {
+        ensurePlay();
+      }
+    };
+
+    // Fallback autoplay if browser strictly requires a user gesture first
+    const handleUserGesture = () => {
+      ensurePlay();
+    };
+
+    document.addEventListener('visibilitychange', handleVisibility);
+    window.addEventListener('scroll', handleUserGesture, { once: true, passive: true });
+    window.addEventListener('click', handleUserGesture, { once: true });
+    window.addEventListener('touchstart', handleUserGesture, { once: true, passive: true });
+
+    return () => {
+      video.removeEventListener('loadeddata', ensurePlay);
+      video.removeEventListener('canplay', ensurePlay);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      window.removeEventListener('scroll', handleUserGesture);
+      window.removeEventListener('click', handleUserGesture);
+      window.removeEventListener('touchstart', handleUserGesture);
+    };
   }, []);
 
   return (
     <section className="relative overflow-hidden border-b-2 border-card-border bg-[#0a0a18] min-h-screen flex flex-col justify-center pt-28 sm:pt-36 pb-24 sm:pb-36">
       {/* Video Background — Membentang penuh dari puncak layar (y=0) di belakang navbar transparan */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden flex items-center justify-center">
+        {/* Still frame fallback underneath video so loading/loop transitions never flash black */}
+        <Image
+          src="/bg-video-poster.jpg"
+          alt=""
+          aria-hidden="true"
+          fill
+          priority
+          unoptimized
+          className="object-cover opacity-90"
+          style={{ transform: 'translate3d(0, 0, 0) scale(1.35)', transformOrigin: 'center center' }}
+        />
         <video
           ref={videoRef}
+          src="/bg-video.mp4?v=3"
+          poster="/bg-video-poster.jpg"
           autoPlay
           loop
           muted
           playsInline
           preload="auto"
-          className="w-full h-full object-cover opacity-90 transition-transform duration-300"
-          style={{ transform: 'scale(1.35)', transformOrigin: 'center center' }}
-        >
-          <source src="/bg-video.mp4?v=2" type="video/mp4" />
-        </video>
+          onCanPlay={(e) => {
+            const v = e.currentTarget;
+            v.muted = true;
+            if (v.paused) v.play().catch(() => {});
+          }}
+          className="relative z-[1] w-full h-full object-cover opacity-90"
+          style={{ transform: 'translate3d(0, 0, 0) scale(1.35)', transformOrigin: 'center center' }}
+        />
         {/* Dark contrast overlay & arcade ambient lighting */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a18]/50 via-[#0a0a18]/25 to-[#0a0a18]/70" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(0,255,136,0.08),transparent)]" />
+        <div className="absolute inset-0 z-[2] bg-gradient-to-b from-[#0a0a18]/45 via-[#0a0a18]/20 to-[#0a0a18]/65" />
+        <div className="absolute inset-0 z-[2] bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(0,255,136,0.08),transparent)]" />
       </div>
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 relative z-10">
