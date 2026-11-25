@@ -54,7 +54,7 @@ export default function HeroSection({
   return (
     <section className="relative overflow-hidden border-b-2 border-card-border bg-[#0a0a18] min-h-screen flex flex-col justify-center pt-28 sm:pt-36 pb-24 sm:pb-36">
       {/* Video Background — Membentang penuh dari puncak layar (y=0) di belakang navbar transparan */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden">
+      <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden flex items-center justify-center">
         <video
           ref={videoRef}
           autoPlay
@@ -62,7 +62,8 @@ export default function HeroSection({
           muted
           playsInline
           preload="auto"
-          className="w-full h-full object-cover opacity-90 transition-opacity duration-500"
+          className="w-full h-full object-cover opacity-90 transition-transform duration-300"
+          style={{ transform: 'scale(1.35)', transformOrigin: 'center center' }}
         >
           <source src="/bg-video.mp4?v=2" type="video/mp4" />
         </video>
