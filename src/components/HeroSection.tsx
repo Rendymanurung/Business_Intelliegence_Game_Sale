@@ -57,19 +57,14 @@ export default function HeroSection({
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden">
         <video
           ref={videoRef}
-          src="/bg-video.mp4"
           autoPlay
           loop
           muted
           playsInline
           preload="auto"
-          onCanPlay={(e) => {
-            e.currentTarget.muted = true;
-            e.currentTarget.play().catch(() => {});
-          }}
           className="w-full h-full object-cover opacity-90 transition-opacity duration-500"
         >
-          <source src="/bg-video.mp4" type="video/mp4" />
+          <source src="/bg-video.mp4?v=2" type="video/mp4" />
         </video>
         {/* Dark contrast overlay & arcade ambient lighting */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a18]/50 via-[#0a0a18]/25 to-[#0a0a18]/70" />
