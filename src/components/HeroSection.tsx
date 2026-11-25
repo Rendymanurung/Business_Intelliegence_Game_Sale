@@ -21,8 +21,33 @@ export default function HeroSection({
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
+      video.defaultMuted = true;
       video.muted = true;
-      video.play().catch(() => {});
+      const playVideo = () => {
+        video.play().catch(() => {});
+      };
+      if (video.readyState >= 2) {
+        playVideo();
+      } else {
+        video.addEventListener('loadeddata', playVideo, { once: true });
+        video.addEventListener('canplay', playVideo, { once: true });
+      }
+
+      // Fallback autoplay if browser requires user interaction first
+      const handleUserGesture = () => {
+        if (video.paused) {
+          video.play().catch(() => {});
+        }
+      };
+      window.addEventListener('scroll', handleUserGesture, { once: true });
+      window.addEventListener('click', handleUserGesture, { once: true });
+      window.addEventListener('touchstart', handleUserGesture, { once: true });
+
+      return () => {
+        window.removeEventListener('scroll', handleUserGesture);
+        window.removeEventListener('click', handleUserGesture);
+        window.removeEventListener('touchstart', handleUserGesture);
+      };
     }
   }, []);
 
@@ -32,18 +57,23 @@ export default function HeroSection({
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden">
         <video
           ref={videoRef}
+          src="/bg-video.mp4"
           autoPlay
           loop
           muted
+          defaultMuted
           playsInline
           preload="auto"
-          className="w-full h-full object-cover opacity-85 transition-transform duration-300"
-          style={{ transform: 'scale(1.25)', transformOrigin: 'center center' }}
+          onCanPlay={(e) => {
+            e.currentTarget.muted = true;
+            e.currentTarget.play().catch(() => {});
+          }}
+          className="w-full h-full object-cover opacity-90 transition-opacity duration-500"
         >
           <source src="/bg-video.mp4" type="video/mp4" />
         </video>
         {/* Dark contrast overlay & arcade ambient lighting */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a18]/70 via-[#0a0a18]/50 to-[#0a0a18]/80 backdrop-blur-[0.5px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a18]/50 via-[#0a0a18]/25 to-[#0a0a18]/70" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(0,255,136,0.08),transparent)]" />
       </div>
 
