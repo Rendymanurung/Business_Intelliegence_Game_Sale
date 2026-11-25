@@ -61,7 +61,6 @@ export default function HeroSection({
           autoPlay
           loop
           muted
-          defaultMuted
           playsInline
           preload="auto"
           onCanPlay={(e) => {
